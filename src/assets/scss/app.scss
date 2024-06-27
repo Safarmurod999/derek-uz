@@ -1,0 +1,20 @@
+@import "base/mixins";
+
+@include font-face("RF Dewi", "RFDewiExtended-Regular.ttf", "truetype", 400);
+// @include font-face("RF Dewi Extended", "OpenSans-Regular.ttf", "truetype", 400);
+// @include font-face("RF Dewi Extended", "OpenSans-Medium.ttf", "truetype", 500);
+// @include font-face("RF Dewi Extended", "OpenSans-SemiBold.ttf", "truetype", 600);
+// @include font-face("RF Dewi Extended", "OpenSans-Bold.ttf", "truetype", 700);
+
+:root {
+  --font-primary: "RF Dewi", sans-serif;
+  --text-color: #231F20;
+  --primary: #00AEEF;
+  --primary-light: #F4F4F4;
+  --white: #FFFFFF;
+  --gray: #808080;
+  --transition: all 0.3s ease-in-out;
+}
+
+@import "base/normalize";
+@import "components/index";

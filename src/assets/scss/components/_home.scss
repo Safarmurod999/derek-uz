@@ -1,0 +1,56 @@
+.home {
+  .container {
+    position: relative;
+    border-radius: 30px;
+  }
+  &__top {
+    position: absolute;
+    top: 16px;
+    left: 50%;
+    width: full;
+    height: 56px;
+    transform: translateX(-50%);
+    z-index: 10;
+  }
+  &__main {
+    @include flex-col(center, center);
+    position: absolute;
+    width: 100%;
+    left: 50%;
+    bottom: 54px;
+    transform: translateX(-50%);
+  }
+  .swiper {
+    margin-top: 17px;
+    border-radius: 30px;
+  }
+  &__image {
+    @include flex-row(center, center);
+    border-radius: 30px;
+    transition: 0;
+    img {
+      width: 100%;
+      border-radius: 30px;
+    }
+  }
+  &__title {
+    max-width: 665px;
+    margin-bottom: 17px;
+    font-size: 40px;
+    text-align: center;
+    text-transform: uppercase;
+  }
+  &__text {
+    margin-bottom: 22px;
+    color: var(--gray);
+    line-height: 16px;
+  }
+  &__btn {
+    padding: 17px 59px;
+    font-size: 16px;
+    line-height: 16px;
+    color: var(--white);
+    border-radius: 10px;
+    background: var(--primary);
+  }
+}
