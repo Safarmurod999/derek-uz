@@ -7,11 +7,18 @@
   border-top-left-radius: 5px;
   transition: 0.3s;
   cursor: pointer;
+  @media screen and (max-width: 1050px) {
+    width: auto;
+    padding-inline: 0;
+  }
   &:hover {
     background: var(--primary-light);
     .dropdown__content {
       display: flex;
       background: var(--primary-light);
+      @media screen and (max-width: 1050px) {
+        display: none;
+      }
     }
   }
   &__button {
@@ -30,6 +37,7 @@
     border-bottom-left-radius: 5px;
 
     transition: 0.3s;
+
     a {
       font-size: 12px;
     }
