@@ -116,3 +116,19 @@
     }
   }
 }
+
+.bestsellers {
+  padding: 50px 0 30px;
+  .title{
+    margin-bottom: 21px;
+  }
+}
+
+.products {
+  padding: 20px 0;
+  background-color: #efefef;
+  .products__top {
+    width: 100%;
+    @include between;
+  }
+}

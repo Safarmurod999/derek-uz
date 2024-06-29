@@ -83,10 +83,10 @@ const Header = () => {
               })
             }
 
-            <div className="header__menu--item">
+            <div className="header__menu--item menu--item">
               <p>Загрузки</p>
             </div>
-            <div className="header__menu--item">
+            <div className="header__menu--item menu--item">
               <p>Корзина</p>
             </div>
 

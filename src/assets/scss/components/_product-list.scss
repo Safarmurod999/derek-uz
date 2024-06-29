@@ -1,0 +1,115 @@
+.product__list {
+  @include grid-cols(3, 20px);
+  @media screen and (max-width: 1120px) {
+    @include grid-cols(2, 20px);
+  }
+  @media screen and (max-width: 740px) {
+    @include grid-cols(1, 20px);
+  }
+  &--item {
+    position: relative;
+    padding: 12px 15px 18px;
+    width: 100%;
+    border-radius: 12px;
+    @include between;
+    background-color: var(--primary-light);
+    cursor: pointer;
+    img {
+      // position: relative;
+      // top: 6px;
+      // left: 10px;
+      width: 140px;
+      rotate: 23deg;
+      filter: drop-shadow(0px 2px 3px rgba(0, 0, 0, 0.25));
+      @media screen and (max-width: 760px) {
+        width: 120px;
+      }
+      @media screen and (max-width: 740px) {
+        width: 160px;
+      }
+      @media screen and (max-width: 450px) {
+        width: 140px;
+      }
+
+      @media screen and (max-width: 380px) {
+        width: 105px;
+      }
+    }
+    div {
+      margin-left: auto;
+      @media screen and (max-width: 1120px) {
+        max-width: 65%;
+      }
+      @media screen and (max-width: 950px) {
+        max-width: 60%;
+      }
+      @media screen and (max-width: 830px) {
+        max-width: 55%;
+      }
+    }
+    button {
+      display: flex;
+      margin-left: auto;
+      padding: 14px;
+      border-radius: 50%;
+      background-color: var(--white);
+      margin-bottom: 4px;
+      @media screen and (max-width: 380px) {
+        padding: 11px;
+        svg {
+          width: 5.6px;
+          height: 5.6px;
+        }
+      }
+    }
+    h3 {
+      font-weight: 700;
+      line-height: 19px;
+      margin-bottom: 8px;
+      @media screen and (max-width: 380px) {
+        margin-bottom: 6px;
+        font-size: 12px;
+        line-height: 14.4px;
+      }
+    }
+    p {
+      max-width: 170px;
+      font-weight: 400;
+      font-size: 12px;
+      line-height: 14.4px;
+      color: var(--gray);
+      @media screen and (max-width: 1120px) {
+        max-width: 100%;
+      }
+      @media screen and (max-width: 450px) {
+        max-width: 165px;
+        font-size: 10px;
+        line-height: 12px;
+      }
+      @media screen and (max-width: 380px) {
+        max-width: 135px;
+        font-size: 10px;
+        line-height: 12px;
+      }
+    }
+
+    &:hover {
+      transition: 0.3s;
+      button {
+        transition: 0.3s;
+        rotate: 45deg;
+      }
+      h3 {
+        transition: 0.3s;
+        color: var(--primary);
+      }
+      img {
+        transition: 0.3s;
+        // width: 220px;
+        // top: -40px;
+        // left: -20px;
+        rotate: 10.8deg;
+      }
+    }
+  }
+}
