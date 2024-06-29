@@ -1,0 +1,26 @@
+.brand__list {
+  margin-top: 29px;
+  .swiper-slide {
+    width: 170px;
+    height: 170px;
+    border-radius: 8px;
+    @media screen and (max-width: 768px) {
+      width: 140px;
+      height: 140px;
+    }
+  }
+  &--item {
+    width: 170px;
+    height: 170px;
+    @include center;
+    border-radius: 8px;
+    background-color: var(--white);
+    img {
+      border-radius: 8px;
+    }
+    @media screen and (max-width: 768px) {
+      width: 140px;
+      height: 140px;
+    }
+  }
+}

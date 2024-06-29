@@ -9,8 +9,10 @@ import { Autoplay, EffectFade } from 'swiper/modules';
 
 import home_main from '../../assets/images/home-1.png'
 import home_2 from '../../assets/images/home-2.png';
+import about_1 from '../../assets/images/about-1.png';
+import about_2 from '../../assets/images/about-2.png';
 
-import { Title, TopLink, ProductList, ProductSlider } from "../../components/index"
+import { Title, TopLink, ProductList, ProductSlider, BrandList, Accordion } from "../../components/index"
 
 const Home = () => {
   return (
@@ -104,6 +106,61 @@ const Home = () => {
             <TopLink title={'Все товары'} link={'/products'} />
           </div>
           <ProductSlider />
+        </div>
+      </section>
+
+      {/* Brands */}
+      <section id="brands" className="brands">
+        <div className="container">
+          <div className="brands__top">
+            <Title>БРЕНДЫ</Title>
+            <TopLink title={'Все бренды'} link={'/brands'} />
+          </div>
+          <BrandList />
+        </div>
+      </section>
+
+      {/* About */}
+      <section id="about" className="about">
+        <div className="container">
+          <div className="about__main">
+            <div className="about__title">
+              Lorem ipsum lorem ipsum lorem
+            </div>
+            <p className="about__text">
+              Lorem ipsum dolor sit amet consectetur. Nunc varius
+              sit non venenatis dignissim felis phasellus.
+              Lobortis amet nunc aliquam tincidunt purus sed faucibus.
+            </p>
+            <Link to={'/catalog'} className="about__btn">
+              Подробнее
+            </Link>
+          </div>
+          <div className="about__images">
+            <div className="about__images--text">
+              <p>Lorem ipsum dolor sit amet consectetur. Nunc varius
+                sit non venenatis dignissim felis phasellus.
+                Lobortis amet nunc aliquam tincidunt purus sed faucibus. </p>
+            </div>
+            <div className="about__images--wrapper">
+              <div className="about__image">
+                <img src={about_1} alt="" />
+              </div>
+              <div className="about__image">
+                <img src={about_2} alt="" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section id="faq" className="faq">
+        <div className="container">
+          <Title>
+            ЧАСТО ЗАДАВАЕМЫЕ ВОПРОСЫ
+          </Title>
+          <Accordion />
         </div>
       </section>
     </>
