@@ -34,7 +34,7 @@ const dropArray = [
     title: 'Партнеры',
     path: '/partners',
     links: [
-      { id: 0, title: 'CC' },
+      { id: 0, title: 'CC',path: '/company#history' },
       { id: 1, title: 'ZI-F​' },
       { id: 2, title: 'ZI-CT​' },
       { id: 3, title: 'LS/LS Press​' },

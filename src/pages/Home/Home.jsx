@@ -132,7 +132,7 @@ const Home = () => {
               sit non venenatis dignissim felis phasellus.
               Lobortis amet nunc aliquam tincidunt purus sed faucibus.
             </p>
-            <Link to={'/catalog'} className="about__btn">
+            <Link to={'/company'} className="about__btn">
               Подробнее
             </Link>
           </div>
