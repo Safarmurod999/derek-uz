@@ -1,0 +1,52 @@
+.aside {
+  max-width: 210px;
+  flex-grow: 1;
+  .rc-slider-step {
+    height: 2px !important;
+  }
+  .rc-slider-rail {
+    height: 2px !important;
+  }
+  .rc-slider-track {
+    height: 2px !important;
+  }
+  &__list {
+    p {
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+    &--item {
+      ul {
+        margin-bottom: 9px;
+        li {
+          @include flex-row;
+          justify-content: flex-start;
+          align-items: center;
+          gap: 10px;
+          font-size: 12px;
+          margin-bottom: 11px;
+          p {
+            margin-bottom: 0;
+          }
+        }
+      }
+    }
+  }
+  &__price {
+    &--input {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 6px;
+      input {
+        padding: 3px 6px;
+        width: 93px;
+        border: 1px solid #dddddd;
+        background-color: #f8f8f8;
+        font-size: 12px;
+      }
+    }
+  }
+}

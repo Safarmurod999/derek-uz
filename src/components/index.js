@@ -8,3 +8,4 @@ export { default as Title } from "./Title/Title.jsx";
 export { default as TopLink } from "./TopLink/TopLink.jsx";
 export { default as BrandList } from "./BrandList/BrandList.jsx";
 export { default as Accordion } from "./Accordion/Accordion.jsx";
+export { default as Aside } from "./Aside/Aside.jsx";

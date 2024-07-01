@@ -103,7 +103,7 @@ const Home = () => {
         <div className="container">
           <div className="products__top">
             <Title>ТОВАРЫ</Title>
-            <TopLink title={'Все товары'} link={'/products'} />
+            <TopLink title={'Все товары'} link={'/catalog'} />
           </div>
           <ProductSlider />
         </div>

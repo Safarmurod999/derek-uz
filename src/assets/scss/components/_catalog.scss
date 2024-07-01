@@ -1,0 +1,14 @@
+.catalog {
+  @include between(25px);
+  margin-top: 101px;
+  .container {
+    @include between(25px);
+    align-items: flex-start;
+  }
+  &__section {
+    @include grid-cols(4, 15px);
+    .card{
+        max-width: 215px;
+    }  
+  }
+}

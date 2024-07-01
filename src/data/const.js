@@ -7,6 +7,8 @@ import brand_10 from "../assets/icons/brand-10.svg";
 import brand_11 from "../assets/icons/brand-11.svg";
 import brand_12 from "../assets/icons/brand-12.svg";
 
+import team_img from "../assets/images/team.png";
+
 export const productArray = [
   {
     id: 0,
@@ -127,5 +129,56 @@ export const accordionArray = [
       "Lorem ipsum dolor sit amet consectetur. Lorem ipsum dolor sit amet \
        consectetur. Lorem ipsum dolor sit amet consectetur.\
        Lorem ipsum dolor sit amet consectetur.",
+  },
+];
+
+export const teamArray = [
+  {
+    id: 0,
+    name: "Дилноза Тулаганова",
+    position: "CEO",
+    image: team_img,
+  },
+  {
+    id: 1,
+    name: "Дилноза Тулаганова",
+    position: "CTO",
+    image: team_img,
+  },
+  {
+    id: 2,
+    name: "Дилноза Тулаганова",
+    position: "CEO",
+    image: team_img,
+  },
+  {
+    id: 3,
+    name: "Дилноза Тулаганова",
+    position: "CTO",
+    image: team_img,
+  },
+  {
+    id: 4,
+    name: "Дилноза Тулаганова",
+    position: "CEO",
+    image: team_img,
+  },
+  {
+    id: 5,
+    name: "Дилноза Тулаганова",
+    position: "CEO",
+    image: team_img,
+  },
+  {
+    id: 6,
+    name: "Дилноза Тулаганова",
+    position: "CEO",
+    image: team_img,
+  },
+  {
+    id: 7,
+    name: "Дилноза Тулаганова",
+    position: "CEO",
+    image: team_img,
   },
 ];

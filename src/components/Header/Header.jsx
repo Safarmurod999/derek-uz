@@ -9,15 +9,17 @@ const dropArray = [
   {
     id: 0,
     title: 'О компании',
+    path: '/company',
     links: [
-      { id: 0, title: 'История' },
-      { id: 1, title: 'Команда' },
-      { id: 2, title: 'Контакты' }
+      { id: 0, title: 'История', path: '/company#history' },
+      { id: 1, title: 'Команда', path: '/company#team' },
+      { id: 2, title: 'Контакты', path: '/company#contact' }
     ]
   },
   {
     id: 1,
     title: 'Каталог',
+    path: '/catalog',
     links: [
       { id: 0, title: 'Creation W.G.' },
       { id: 1, title: 'Shera' },
@@ -30,6 +32,7 @@ const dropArray = [
   {
     id: 2,
     title: 'Партнеры',
+    path: '/partners',
     links: [
       { id: 0, title: 'CC' },
       { id: 1, title: 'ZI-F​' },
@@ -68,7 +71,7 @@ const Header = () => {
     <header className={`header`}>
       <nav className="header__nav">
         <div className={`container ${!show && 'shrink'}`}>
-          <a href="#" className="header__logo">
+          <a href="/" className="header__logo">
             <img src={logo} alt="Logo" />
           </a>
           <div className={`header__menu ${openNavbar ? 'open' : ''}`}>

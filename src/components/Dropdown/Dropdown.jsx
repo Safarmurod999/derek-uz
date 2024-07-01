@@ -1,13 +1,13 @@
-const Dropdown = ({ title, style, links }) => {
+const Dropdown = ({ path, title, style, links }) => {
   return (
     <div className={`dropdown ${style}`}>
-      <p className={`dropdown__button `}>
+      <a href={path} className={`dropdown__button `}>
         {title}
-      </p>
+      </a>
       <div className="dropdown__content">
         {
           links.map((link) => {
-            return <a key={link.id} href="/">{link.title}</a>
+            return <a key={link.id} href={link.path}>{link.title}</a>
           })
         }
       </div>

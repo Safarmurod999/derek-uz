@@ -1,15 +1,27 @@
 import { Suspense, lazy } from "react";
 import { Route, Routes } from "react-router-dom";
-import {Layout} from "../pages/index";
+import { Layout } from "../pages/index";
 import { Spinner } from "../components";
 
 const Home = lazy(() => import("../pages/Home/Home"));
+const Catalog = lazy(() => import("../pages/Catalog/Catalog"));
+const Company = lazy(() => import("../pages/Company/Company"));
 
 export const routesArr = [
     {
         id: 0,
         path: "/",
         element: Home,
+    },
+    {
+        id: 1,
+        path: '/catalog',
+        element: Catalog,
+    },
+    {
+        id: 2,
+        path: '/company',
+        element: Company,
     },
 ];
 

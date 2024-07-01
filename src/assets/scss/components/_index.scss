@@ -1,11 +1,21 @@
+// layout
 @import "header";
-@import "home";
 @import "footer";
 @import "container";
-@import "dropdown";
+
+// components
 @import "title";
-@import "product-list";
 @import "toplink.scss";
+@import "dropdown";
+@import "aside";
+
+// lists
 @import "product-slider";
 @import "brand-list";
+@import "product-list";
 @import "accordion";
+
+// pages
+@import "home";
+@import "catalog";
+@import "company";
