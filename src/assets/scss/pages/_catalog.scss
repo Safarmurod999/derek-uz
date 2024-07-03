@@ -7,17 +7,19 @@
   }
 
   &__search {
+    position: relative;
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: flex-end;
     margin-bottom: 20px;
-    // @media screen and (max-width: 700px) {
-    //   justify-content: flex-start;
-    // }
-    form {
-      @include flex-row;
-      gap: 16px;
+
+    &--bar {
+      form {
+        width: 100%;
+        @include flex-row;
+        gap: 16px;
+      }
       div {
         position: relative;
         display: flex;
@@ -26,13 +28,32 @@
       }
       @media screen and (max-width: 700px) {
         display: none;
+        position: absolute;
+        &.toggle {
+          width: 100%;
+          display: flex;
+          position: absolute;
+          top: 56px;
+          left: 0;
+          padding: 20px 0;
+          background-color: var(--white);
+          div {
+            display: flex;
+            width: 100%;
+          }
+          input {
+            width: 100%;
+          }
+          select {
+            display: none;
+          }
+        }
       }
     }
 
     &--input,
     select {
       padding: 5px 10px;
-      width: 100%;
       width: 185px;
       height: 22px;
       font-size: 10px;
@@ -98,6 +119,7 @@
       }
       @media screen and (max-width: 930px) {
         grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
       }
     }
     .card {
