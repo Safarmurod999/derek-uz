@@ -13,10 +13,23 @@ import about_1 from '../../assets/images/about-1.png';
 import about_2 from '../../assets/images/about-2.png';
 
 import { Title, TopLink, ProductList, ProductSlider, BrandList, Accordion } from "../../components/index"
+import { useState } from "react";
+import Modal from "../Modal/Modal";
 
 const Home = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
   return (
     <>
+      <button style={{position:"absolute",zIndex:"1000"}} onClick={openModal}>Open Modal</button>
+      {isModalOpen && <Modal closeModal={closeModal} />}
       {/* Home */}
       <section id="home" className="home">
         <div className="container">
