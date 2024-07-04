@@ -1,11 +1,13 @@
 import { teamArray } from "../../data/const"
 import company_img from "../../assets/images/company_img.png"
-import { Title } from "../../components"
+import { Cart, Title } from "../../components"
+import { useState } from "react";
 
 const Company = () => {
+
     return (
         <main className="company">
-
+            
             {/* Hero section */}
             <section id="history" className='hero'>
                 <div className="container">

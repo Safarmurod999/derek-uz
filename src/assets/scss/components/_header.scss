@@ -4,7 +4,7 @@
   width: 100%;
   top: 17px;
   left: 0;
-  z-index: 100;
+  z-index: 1000;
   .container {
     @include flex-row(space-between);
   }
@@ -45,14 +45,15 @@
     @media screen and (max-width: 1050px) {
       position: absolute;
       width: 320px;
-      top: -17px;
-      left: -100%;
+      top: -700px;
+      left: 0;
       padding: 22px;
       padding-bottom: 41px;
       border-bottom-right-radius: 10px;
       border-bottom-left-radius: 10px;
       @include flex-col(flex-end, center, 32px);
       background-color: var(--primary-light);
+      z-index: 1000;
     }
     @media screen and (max-width: 450px) {
       width: 100%;
@@ -66,13 +67,13 @@
       }
     }
     &--item {
-      a {
+      a,p {
         font-size: 12px;
         line-height: 14.4px;
       }
       @media screen and (max-width: 1050px) {
         margin-right: 21px;
-        a {
+        a,p {
           font-size: 20px;
           line-height: 24px;
         }
@@ -192,5 +193,5 @@
 }
 .open {
   transition: 0.3s;
-  left: 0;
+  top: -17px;
 }

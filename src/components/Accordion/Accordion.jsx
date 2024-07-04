@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
-import { accordionArray } from '../../data/const'
+// import { accordionArray } from '../../data/const'
 import AccordionItem from './AccordionItem'
 
-const Accordion = () => {
+const Accordion = ({accordionArray}) => {
     return (
         <ul className='accordion'>
             {

@@ -1,12 +1,12 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { productArray } from '../../data/const'
+// import { productArray } from '../../data/const'
 import 'swiper/css';
 
 // Import Swiper styles
 
 import ProductItem from '../ProductItem/ProductItem'
 
-const ProductSlider = () => {
+const ProductSlider = ({productArray}) => {
     return (
         <div className='product__slider'>
             <Swiper

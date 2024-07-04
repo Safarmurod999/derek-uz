@@ -115,7 +115,7 @@ import { useNavigate, useSearchParams } from 'react-router-dom';
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
 
-const Aside = ({ toggleFilter, setToggleFilter }) => {
+const Aside = ({ toggleFilter, setToggleFilter, setToggleSearch }) => {
     const navigate = useNavigate();
     const [searchParams, setSearchParams] = useSearchParams();
 
@@ -145,7 +145,10 @@ const Aside = ({ toggleFilter, setToggleFilter }) => {
     return (
         <aside className={`aside ${toggleFilter ? 'toggle' : ''}`}>
             <div className='aside_toggle'>
-                <button className="aside__toggle--btn" onClick={()=>setToggleFilter(!toggleFilter)}>
+                <button className="aside__toggle--btn" onClick={() => {
+                    setToggleFilter(!toggleFilter)
+                    setToggleSearch(false)
+                }}>
                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <rect x="2.12134" width="24" height="3" rx="1" transform="rotate(45 2.12134 0)" fill="#231F20" />
                         <rect x="0.121338" y="17" width="24" height="3" rx="1" transform="rotate(-45 0.121338 17)" fill="#231F20" />

@@ -182,3 +182,5 @@ export const teamArray = [
     image: team_img,
   },
 ];
+
+export const BASE_URL = "https://derek.itlink.uz/api/v1";

@@ -1,7 +1,7 @@
-import { brandArray } from "../../data/const"
+// import { brandArray } from "../../data/const"
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
-const BrandList = () => {
+const BrandList = ({ brandArray }) => {
     return (
         <ul className="brand__list">
             <Swiper
@@ -26,7 +26,7 @@ const BrandList = () => {
                         return (
                             <SwiperSlide key={brand.id}>
                                 <li key={brand.id} className="brand__list--item">
-                                    <img src={brand.img} alt="image" />
+                                    <img src={brand.brands} alt={brand.name} />
                                 </li>
                             </SwiperSlide>
 
