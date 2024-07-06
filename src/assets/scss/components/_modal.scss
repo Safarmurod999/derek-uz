@@ -8,7 +8,7 @@
   justify-content: space-between;
   align-items: center;
   background-color: var(--white);
-  z-index: 999;
+  z-index: 1000;
   @media screen and (max-width: 560px) {
     align-items: flex-start;
     .container {
@@ -100,8 +100,7 @@
         }
         .color-buttons button {
           margin-right: 6px;
-          width: 28px;
-          height: 28px;
+          padding: 8px;
           border: 1px solid var(--text-color);
         }
       }

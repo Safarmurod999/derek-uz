@@ -1,12 +1,11 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
-// import { productArray } from '../../data/const'
-import 'swiper/css';
 
 // Import Swiper styles
+import 'swiper/css';
 
 import ProductItem from '../ProductItem/ProductItem'
 
-const ProductSlider = ({productArray}) => {
+const ProductSlider = ({productArray,onClick}) => {
     return (
         <div className='product__slider'>
             <Swiper
@@ -33,7 +32,7 @@ const ProductSlider = ({productArray}) => {
                     productArray.map((product) => {
                         return (
                             <SwiperSlide key={product.id}>
-                                <ProductItem {...product} />
+                                <ProductItem {...product} onClick={onClick} />
                             </SwiperSlide>
 
                         )

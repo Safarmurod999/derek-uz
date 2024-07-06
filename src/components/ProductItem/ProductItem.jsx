@@ -1,8 +1,11 @@
+import { toast } from "sonner"
 import { addToCart } from "../../utils/utils"
 
-const ProductItem = ({ image, title, content, price }) => {
-  const handleCart = ()=>{
-    addToCart({title, image, price, content})
+const ProductItem = ({ id, image, title, content, price, color, weight, onClick }) => {
+
+  const handleCart = () => {
+    addToCart({ product: id, title, image, price, content, color: color[0].name, weight: weight[0].value })
+    toast.success('Product added to cart')
   }
   return (
     <div className='product__slider--item card'>
@@ -15,7 +18,7 @@ const ProductItem = ({ image, title, content, price }) => {
         <p className="card-price">${price}</p>
         <div className="card-actions">
           <button className="card-btn" onClick={handleCart}>В корзину</button>
-          <button className="card-btn">Подробнее</button>
+          <button className="card-btn" onClick={() => onClick({ product: id, image, title, price, color, weight, content })}>Подробнее</button>
         </div>
       </div>
     </div>

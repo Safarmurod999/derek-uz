@@ -1,147 +1,75 @@
-// import React, { useState } from 'react'
-// import { useNavigate, useSearchParams } from 'react-router-dom';
-// import Slider from 'rc-slider';
-// import 'rc-slider/assets/index.css';
-// const Aside = () => {
-//     const navigate = useNavigate();
-//     const [searchParams, setSearchParams] = useSearchParams();
-//     const [priceRange, setPriceRange] = useState([searchParams.get('from') || 0, searchParams.get('to') || 100]);
-//     // const [product, setProduct] = useState(searchParams.get('product') || '');
-
-//     const handleChange = (value) => {
-//         setPriceRange(value);
-//         const query = new URLSearchParams({ from: value[0], to: value[1] }).toString();
-//         setSearchParams(query)
-//     };
-//     // const handleProductChange = (product) => {
-//     //     setProduct(product);
-//     //     const query = new URLSearchParams({ product: product }).toString();
-//     //     setSearchParams(query)
-//     // }
-//     return (
-//         <aside className='aside'>
-//             <ul className='aside__list'>
-//                 <li className='aside__list--item'>
-//                     <p>Все</p>
-//                     <ul>
-//                         <li>Creation</li>
-//                         <li>Shera</li>
-//                         <li>Candulor</li>
-//                     </ul>
-//                 </li>
-//                 <li className='aside__list--item'>
-//                     <p>Товар</p>
-//                     <ul>
-//                         <li>
-//                             <input type="checkbox" name="check" id="" />
-//                             <p>Lorem ipsum</p>
-//                         </li>
-//                         <li>
-//                             <input type="checkbox" name="check" id="" />
-//                             <p>Lorem ipsum</p>
-//                         </li>
-//                         <li>
-//                             <input type="checkbox" name="check" id="" />
-//                             <p>Lorem ipsum</p>
-//                         </li>
-//                     </ul>
-//                 </li>
-//                 <li className='aside__list--item'>
-//                     <p>Цена</p>
-//                     <div>
-//                         <div>
-//                             <Slider
-//                                 range
-//                                 min={0}
-//                                 max={100}
-//                                 defaultValue={priceRange}
-//                                 // value={priceRange}
-//                                 onChange={handleChange}
-//                             />
-//                         </div>
-//                         <div className='aside__price--input'>
-//                             <input
-//                                 type="number"
-//                                 value={priceRange[0]}
-//                                 min={0}
-//                                 max={100}
-//                                 onChange={(e) => handleChange([+e.target.value, priceRange[1]])}
-//                             />
-//                             <input
-//                                 type="number"
-//                                 value={priceRange[1]}
-//                                 min={0}
-//                                 max={100}
-//                                 onChange={(e) => handleChange([priceRange[0], +e.target.value])}
-//                             />
-//                         </div>
-//                     </div>
-//                 </li>
-//                 <li className='aside__list--item'>
-//                     <p>Масса</p>
-//                     <ul>
-//                         <li>
-//                             <input type="checkbox" name="check" id="" />
-//                             <p>10 г.</p>
-//                         </li>
-//                         <li>
-//                             <input type="checkbox" name="check" id="" />
-//                             <p>15 г.</p>
-//                         </li>
-//                     </ul>
-//                 </li>
-//             </ul>
-//         </aside>
-//     )
-// }
-
-// export default Aside
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
 
-const Aside = ({ toggleFilter, setToggleFilter, setToggleSearch }) => {
+const Aside = ({ toggleFilter, setToggleFilter, setToggleSearch, weights, categories }) => {
     const navigate = useNavigate();
     const [searchParams, setSearchParams] = useSearchParams();
 
     const [priceRange, setPriceRange] = useState([
         Number(searchParams.get('from')) || 0,
-        Number(searchParams.get('to')) || 100
+        Number(searchParams.get('to')) || 100000
     ]);
+    const [category, setCategory] = useState(searchParams.get('category') || '');
+    const [weight, setWeight] = useState(searchParams.get('weight') ?? []);
 
-    const [product, setProduct] = useState(searchParams.get('product') || '');
+    // useEffect(() => {
+    //     const params = Object.fromEntries(searchParams.entries());
 
-    useEffect(() => {
-        const params = Object.fromEntries(searchParams.entries());
-        if (product) params.product = product;
-        params.from = priceRange[0];
-        params.to = priceRange[1];
-        setSearchParams(params);
-    }, [product, priceRange]);
+    //     params.category = category;
+    //     params.from = priceRange[0];
+    //     params.to = priceRange[1];
+    //     if (typeof weight === 'string') {
+    //         params.weight = weight;
+    //     } else {
+    //         params.weight = JSON.stringify(weight);
+    //     }
+    //     setSearchParams(params);
+    // }, [category, priceRange, weight]);
 
+    const handleCategory = (_category) => {
+        if (_category == category) {
+            setCategory('');
+            setSearchParams({ category: '', from: priceRange[0], to: priceRange[1], weight: JSON.stringify(weight) });
+        } else {
+            setCategory(_category);
+            setSearchParams({ category: _category, from: priceRange[0], to: priceRange[1], weight: JSON.stringify(weight) });
+        }
+    }
     const handlePriceChange = (value) => {
         setPriceRange(value);
+        setSearchParams({ category: category, from: priceRange[0], to: priceRange[1], weight: JSON.stringify(weight) });
     };
-
-    const handleProductChange = (product) => {
-        setProduct(product);
-    };
-
+    const handleWeight = (newWeight) => {
+        if (typeof weight === 'string') {
+            var weightArray = JSON.parse(weight);
+        } else {
+            var weightArray = weight;
+        }
+        if (!weightArray.includes(newWeight)) {
+            weightArray.push(newWeight)
+            setWeight(weightArray);
+            setSearchParams({ category: category, from: priceRange[0], to: priceRange[1], weight: JSON.stringify(weightArray) });
+        } else {
+            weightArray = weightArray.filter((item) => item !== newWeight);
+            console.log(weightArray);
+            setWeight(weightArray);
+            setSearchParams({ category: category, from: priceRange[0], to: priceRange[1], weight: JSON.stringify(weightArray) });
+        }
+    }
+    const handleCheck = (value) => {
+        const params = Object.fromEntries(searchParams.entries());
+        let isExist = false;
+        let arr = params.weight ? JSON.parse(params.weight) : []
+        for (const el of arr) {
+            if (el == value) {
+                isExist = true;
+                break;
+            }
+        }
+        return isExist;
+    }
     return (
         <aside className={`aside ${toggleFilter ? 'toggle' : ''}`}>
             <div className='aside_toggle'>
@@ -159,44 +87,13 @@ const Aside = ({ toggleFilter, setToggleFilter, setToggleSearch }) => {
                 <li className='aside__list--item'>
                     <p>Все</p>
                     <ul>
-                        <li>Creation</li>
-                        <li>Shera</li>
-                        <li>Candulor</li>
-                    </ul>
-                </li>
-                <li className='aside__list--item'>
-                    <p>Товар</p>
-                    <ul>
-                        <li>
-                            <input
-                                type="checkbox"
-                                name="product"
-                                value="product1"
-                                checked={product === 'product1'}
-                                onChange={(e) => handleProductChange(e.target.checked ? e.target.value : '')}
-                            />
-                            <p>Product 1</p>
-                        </li>
-                        <li>
-                            <input
-                                type="checkbox"
-                                name="product"
-                                value="product2"
-                                checked={product === 'product2'}
-                                onChange={(e) => handleProductChange(e.target.checked ? e.target.value : '')}
-                            />
-                            <p>Product 2</p>
-                        </li>
-                        <li>
-                            <input
-                                type="checkbox"
-                                name="product"
-                                value="product3"
-                                checked={product === 'product3'}
-                                onChange={(e) => handleProductChange(e.target.checked ? e.target.value : '')}
-                            />
-                            <p>Product 3</p>
-                        </li>
+                        {
+                            categories.map((_category) => (
+                                <li key={_category.id} onClick={() => handleCategory(_category.id)}>
+                                    <p>{_category.name}</p>
+                                </li>
+                            ))
+                        }
                     </ul>
                 </li>
                 <li className='aside__list--item'>
@@ -206,7 +103,7 @@ const Aside = ({ toggleFilter, setToggleFilter, setToggleSearch }) => {
                             <Slider
                                 range
                                 min={0}
-                                max={100}
+                                max={100000}
                                 value={priceRange}
                                 onChange={handlePriceChange}
                             />
@@ -216,14 +113,14 @@ const Aside = ({ toggleFilter, setToggleFilter, setToggleSearch }) => {
                                 type="number"
                                 value={priceRange[0]}
                                 min={0}
-                                max={100}
+                                max={100000}
                                 onChange={(e) => handlePriceChange([+e.target.value, priceRange[1]])}
                             />
                             <input
                                 type="number"
                                 value={priceRange[1]}
                                 min={0}
-                                max={100}
+                                max={100000}
                                 onChange={(e) => handlePriceChange([priceRange[0], +e.target.value])}
                             />
                         </div>
@@ -232,14 +129,15 @@ const Aside = ({ toggleFilter, setToggleFilter, setToggleSearch }) => {
                 <li className='aside__list--item'>
                     <p>Масса</p>
                     <ul>
-                        <li>
-                            <input type="checkbox" name="check" id="" />
-                            <p>10 г.</p>
-                        </li>
-                        <li>
-                            <input type="checkbox" name="check" id="" />
-                            <p>15 г.</p>
-                        </li>
+                        {
+                            weights.map((_weight) => (
+                                <li key={_weight.id}>
+                                    <input type="checkbox" name="check" id={`weight_${_weight.id}`} checked={handleCheck(_weight.id)} onChange={() => handleWeight(_weight.id)} />
+                                    <label htmlFor={`weight_${_weight.id}`}>{_weight.value} г.</label>
+                                </li>
+                            )
+                            )
+                        }
                     </ul>
                 </li>
             </ul>

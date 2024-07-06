@@ -1,39 +1,24 @@
 import React, { useEffect, useState } from 'react'
 
 import cartImage from '@/assets/images/product-mini.png';
+import { addData, calculateTotals, clearCart, decrementQuantity, incrementQuantity, removeItem, setCart, setName, setPhoneNumber, setQuanTity } from '../../store/cartSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { toast } from 'sonner';
 
-const Cart = ({ isModalOpen, setIsModalOpen, quantity, setQuantity }) => {
-
-    const [cartItems, setCartItems] = useState(JSON.parse(localStorage.getItem('cartItems')) || [])
+const Cart = ({ isModalOpen, setIsModalOpen }) => {
 
 
-    const totalPrice = cartItems.reduce((acc, item) => {
-        return acc + item.price * quantity
-    }, 0);
-
-    const incrementQuantity = () => {
-        setQuantity(quantity + 1);
-    };
-
-    const decrementQuantity = () => {
-        if (quantity > 1) {
-            setQuantity(quantity - 1);
-        }
-    };
+    const { total, cart, phone_number, name } = useSelector((store) => store.cart);
+    const dispatch = useDispatch();
 
     const toggleModal = () => {
         setIsModalOpen(!isModalOpen);
+        dispatch(setCart());
     };
 
-    const removeItem = (id) => {
-        setCartItems(cartItems.filter(item => item.id !== id))
-        localStorage.setItem('cartItems', JSON.stringify(cartItems));
-    }
-
-    const clearCart = () => {
-        setCartItems([])
-        localStorage.removeItem('cartItems')
-    }
+    useEffect(() => {
+        dispatch(calculateTotals(cart));
+    }, [cart]);
 
     return (
         <div className={`cart ${isModalOpen ? 'open' : ''}`}>
@@ -51,7 +36,7 @@ const Cart = ({ isModalOpen, setIsModalOpen, quantity, setQuantity }) => {
                 </button>
                 <div className="cart__header">
                     <h2 className='cart__title'>Корзина</h2>
-                    <button onClick={clearCart}>
+                    <button onClick={() => dispatch(clearCart())}>
                         <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M15.1875 3.375H12.375V2.8125C12.375 2.36495 12.1972 1.93572 11.8807 1.61926C11.5643 1.30279 11.1351 1.125 10.6875 1.125H7.3125C6.86495 1.125 6.43572 1.30279 6.11926 1.61926C5.80279 1.93572 5.625 2.36495 5.625 2.8125V3.375H2.8125C2.66332 3.375 2.52024 3.43426 2.41475 3.53975C2.30926 3.64524 2.25 3.78832 2.25 3.9375C2.25 4.08668 2.30926 4.22976 2.41475 4.33525C2.52024 4.44074 2.66332 4.5 2.8125 4.5H3.375V14.625C3.375 14.9234 3.49353 15.2095 3.7045 15.4205C3.91548 15.6315 4.20163 15.75 4.5 15.75H13.5C13.7984 15.75 14.0845 15.6315 14.2955 15.4205C14.5065 15.2095 14.625 14.9234 14.625 14.625V4.5H15.1875C15.3367 4.5 15.4798 4.44074 15.5852 4.33525C15.6907 4.22976 15.75 4.08668 15.75 3.9375C15.75 3.78832 15.6907 3.64524 15.5852 3.53975C15.4798 3.43426 15.3367 3.375 15.1875 3.375ZM7.875 11.8125C7.875 11.9617 7.81574 12.1048 7.71025 12.2102C7.60476 12.3157 7.46168 12.375 7.3125 12.375C7.16332 12.375 7.02024 12.3157 6.91475 12.2102C6.80926 12.1048 6.75 11.9617 6.75 11.8125V7.3125C6.75 7.16332 6.80926 7.02024 6.91475 6.91475C7.02024 6.80926 7.16332 6.75 7.3125 6.75C7.46168 6.75 7.60476 6.80926 7.71025 6.91475C7.81574 7.02024 7.875 7.16332 7.875 7.3125V11.8125ZM11.25 11.8125C11.25 11.9617 11.1907 12.1048 11.0852 12.2102C10.9798 12.3157 10.8367 12.375 10.6875 12.375C10.5383 12.375 10.3952 12.3157 10.2898 12.2102C10.1843 12.1048 10.125 11.9617 10.125 11.8125V7.3125C10.125 7.16332 10.1843 7.02024 10.2898 6.91475C10.3952 6.80926 10.5383 6.75 10.6875 6.75C10.8367 6.75 10.9798 6.80926 11.0852 6.91475C11.1907 7.02024 11.25 7.16332 11.25 7.3125V11.8125ZM11.25 3.375H6.75V2.8125C6.75 2.66332 6.80926 2.52024 6.91475 2.41475C7.02024 2.30926 7.16332 2.25 7.3125 2.25H10.6875C10.8367 2.25 10.9798 2.30926 11.0852 2.41475C11.1907 2.52024 11.25 2.66332 11.25 2.8125V3.375Z" fill="#D1D1D1" />
                         </svg>
@@ -61,7 +46,7 @@ const Cart = ({ isModalOpen, setIsModalOpen, quantity, setQuantity }) => {
 
                 <div className='cart__wrapper'>
                     {
-                        cartItems.map((item) => {
+                        cart.map((item) => {
                             return <div key={item.id} className="cart__item">
                                 <div className='cart__item--top'>
                                     <div className='cart__left'>
@@ -73,7 +58,7 @@ const Cart = ({ isModalOpen, setIsModalOpen, quantity, setQuantity }) => {
                                         </div>
                                     </div>
                                     <div className='cart__right'>
-                                        <button className="cart__cancel" onClick={() => removeItem(item.id)}>
+                                        <button className="cart__cancel" onClick={() => dispatch(removeItem(item.id))}>
                                             <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <rect width="18" height="18" rx="4" fill="#D8D4DB" />
                                                 <rect width="9.39109" height="1.17389" rx="0.586943" transform="matrix(0.70541 0.7088 -0.70541 0.7088 6.07806 5.25)" fill="white" />
@@ -81,7 +66,7 @@ const Cart = ({ isModalOpen, setIsModalOpen, quantity, setQuantity }) => {
                                             </svg>
                                         </button>
                                         <div className="cart__price">
-                                            {item.price * quantity} $
+                                            {item.price} $
                                         </div>
                                     </div>
                                 </div>
@@ -97,25 +82,34 @@ const Cart = ({ isModalOpen, setIsModalOpen, quantity, setQuantity }) => {
                                         </li>
                                         <li className="cart__details--item">
                                             <p>Масса</p>
-                                            <div>{item.weight}</div>
+                                            <div>{item.weight} g</div>
                                         </li>
                                     </ul>
                                     <div className="cart__quantity">
-                                        <button onClick={decrementQuantity}>-</button>
-                                        <input type="text" value={quantity} onChange={(e) => setQuantity(e.target.value)} />
-                                        <button onClick={incrementQuantity}>+</button>
+                                        <button onClick={() => dispatch(decrementQuantity(item.id))}>-</button>
+                                        <input type="text" value={item.quantity} onChange={(e) => dispatch(setQuanTity(e.target.value, item.id))} />
+                                        <button onClick={() => dispatch(incrementQuantity(item.id))}>+</button>
                                     </div>
                                 </div>
                             </div>
                         })
                     }
                     <div className="cart__total">
-                        Сумма:  {totalPrice} $
+                        Сумма:  {total} $
                     </div>
-                    <form className='form'>
+                    <form className='form' onSubmit={(e) => {
+                        e.preventDefault();
+                        let newData = {
+                            name,
+                            phone_number,
+                            cart
+                        }
+                        toast.success('Order accepted')
+                        dispatch(addData({ apiEndpoint: '/orders/', newData }))
+                    }}>
                         <div className='form__content'>
-                            <input className='form__input' type="text" placeholder='Имя' name='name' />
-                            <input className='form__input' type="text" placeholder='+998 123 45 67' name='mobile' />
+                            <input className='form__input' type="text" placeholder='Имя' name='name' value={name} onChange={(e) => dispatch(setName(e.target.value))} required />
+                            <input className='form__input' type="text" placeholder='+998 123 45 67' name='mobile' value={phone_number} onChange={(e) => dispatch(setPhoneNumber(e.target.value))} required />
                         </div>
 
                         <button type="submit">Заказать</button>

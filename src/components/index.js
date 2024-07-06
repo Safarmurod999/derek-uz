@@ -10,3 +10,5 @@ export { default as BrandList } from "./BrandList/BrandList.jsx";
 export { default as Accordion } from "./Accordion/Accordion.jsx";
 export { default as Aside } from "./Aside/Aside.jsx";
 export { default as Cart } from "./Cart/Cart.jsx";
+export {default as Pagination } from "./Pagination/Pagination.jsx";
+export { default as ProductModal } from "./ProductModal/ProductModal.jsx";

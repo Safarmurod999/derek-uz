@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Link } from "react-router-dom"
 import { Swiper, SwiperSlide } from 'swiper/react';
 
@@ -15,27 +16,38 @@ import about_2 from '../../assets/images/about-2.png';
 
 // Components
 import { Title, TopLink, ProductList, ProductSlider, BrandList, Accordion, Spinner } from "../../components/index"
-import { useState } from "react";
 import ProductModal from "../../components/ProductModal/ProductModal";
 
 // Fetching data
 import useFetchMultipleAPIs from "../../utils/utils";
-import { accordionArray } from "../../data/const";
 
 const Home = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [item, setItem] = useState({
+    title: '',
+    image: '',
+    price: 0,
+    quantity: 1,
+    content: '',
+    weight: ["10g"],
+    color: "A1",
+    category: 0,
+  });
 
-  const openModal = () => {
+
+  const openModal = (item) => {
+    setItem(item)
     setIsModalOpen(true);
   };
 
   const closeModal = () => {
+    setItem({})
     setIsModalOpen(false);
   };
 
   const urls = [
     '/banners',
-    '/products-list',
+    '/products-list?limit=10',
     '/brands',
     '/faqs',
     '/categories',
@@ -56,7 +68,7 @@ const Home = () => {
 
     const getColors = (_colors) => {
       return _colors.map(
-        (color) => colors.find((item) => item == color)
+        (color) => colors.find((item) => item.id == color)
       );
     }
 
@@ -65,10 +77,10 @@ const Home = () => {
         (weight) => weights.find((item) => item.id == weight)
       )
     }
-  
+
     productsArray = productsArray.map((product) => {
       const category = categories.find(category => category.id == product.category);
-  
+
       return {
         ...product,
         category: category ? category.name : "No category",
@@ -76,14 +88,14 @@ const Home = () => {
         weight: getWeights(product.weight),
       }
     });
-    console.log(productsArray);
   }
+
+
 
   return (
     !loading && (
       <>
-        <button style={{ position: "absolute", zIndex: "1000" }} onClick={openModal}>Open Modal</button>
-        {isModalOpen && <ProductModal closeModal={closeModal} />}
+        {isModalOpen && <ProductModal closeModal={closeModal} item={item} />}
         {/* Home */}
         <section id="home" className="home">
           <div className="container">
@@ -103,54 +115,29 @@ const Home = () => {
               modules={[Autoplay, EffectFade]}
               className="mySwiper"
             >
-              <SwiperSlide>
-                <div className="home__image">
-                  <img src={home_main} alt="" />
-                </div>
-                <div className="home__main">
-                  <div className="home__title">
-                    Lorem ipsum lorem ipsum lorem ipsum lorem
-                  </div>
-                  <p className="home__text">
-                    Lorem ipsum lorem ipsum lorem ipsum lorem
-                  </p>
-                  <Link to={'/catalog'} className="home__btn">
-                    Каталог
-                  </Link>
-                </div>
-              </SwiperSlide>
-              <SwiperSlide>
-                <div className="home__image">
-                  <img src={home_2} alt="image" />
-                </div>
-                <div className="home__main">
-                  <div className="home__title">
-                    Lorem ipsum lorem ipsum lorem ipsum lorem
-                  </div>
-                  <p className="home__text">
-                    Lorem ipsum lorem ipsum lorem ipsum lorem
-                  </p>
-                  <Link to={'/catalog'} className="home__btn">
-                    Каталог
-                  </Link>
-                </div>
-              </SwiperSlide>
-              <SwiperSlide>
-                <div className="home__image">
-                  <img src={home_main} alt="" />
-                </div>
-                <div className="home__main">
-                  <div className="home__title">
-                    Lorem ipsum lorem ipsum lorem ipsum lorem
-                  </div>
-                  <p className="home__text">
-                    Lorem ipsum lorem ipsum lorem ipsum lorem
-                  </p>
-                  <Link to={'/catalog'} className="home__btn">
-                    Каталог
-                  </Link>
-                </div>
-              </SwiperSlide>
+              {
+                data[0]?.map((item, index) => {
+
+                  return (
+                    <SwiperSlide key={index}>
+                      <div className="home__image">
+                        <img src={item.image} alt="" />
+                      </div>
+                      <div className="home__main">
+                        <div className="home__title">
+                          {item.title}
+                        </div>
+                        <p className="home__text">
+                          {item.subtitle}
+                        </p>
+                        <Link to={'/catalog'} className="home__btn">
+                          Каталог
+                        </Link>
+                      </div>
+                    </SwiperSlide>
+                  )
+                })
+              }
             </Swiper>
           </div>
         </section>
@@ -172,7 +159,7 @@ const Home = () => {
               <Title>ТОВАРЫ</Title>
               <TopLink title={'Все товары'} link={'/catalog'} />
             </div>
-            <ProductSlider productArray={data[1]?.results} />
+            <ProductSlider productArray={productsArray} onClick={openModal} />
           </div>
         </section>
 

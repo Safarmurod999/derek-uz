@@ -38,6 +38,7 @@ export function addToCart({
   color,
   weight,
   category,
+  quantity,
 }) {
   let cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
   let item = {
@@ -45,7 +46,7 @@ export function addToCart({
     title: title,
     image: image,
     price: price,
-    quantity: 1,
+    quantity: quantity || 1,
     content: content,
     weight: weight || ["10g"],
     color: color || "A1",
@@ -55,3 +56,48 @@ export function addToCart({
   cartItems.push(item);
   localStorage.setItem("cartItems", JSON.stringify(cartItems));
 }
+
+export const useFetch = (url) => {
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  const getData = async () => {
+    fetch(`${BASE_URL}${url}`)
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        setData(data);
+      })
+      .catch((error) => {
+        setError(error);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
+  useEffect(() => {
+    setLoading(true);
+    getData();
+  }, [url]);
+  return { data, loading, error };
+};
+
+export const handleDownload = (urls) => {
+  urls.forEach((url, index) => {
+    fetch(url.catalog)
+      .then((response) => response.blob())
+      .then((blob) => {
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.style.display = "none";
+        a.href = url;
+        a.download = `Derek_uz_${index}`;
+        document.body.appendChild(a);
+        a.click();
+        window.URL.revokeObjectURL(url);
+      })
+      .catch(() => console.error("Failed to download"));
+  });
+};
