@@ -2,9 +2,11 @@ import { toast } from "sonner"
 import { addToCart } from "../../utils/utils"
 import i18n from "../../utils/i18n"
 import { useTranslation } from "react-i18next";
+import { useDispatch } from "react-redux";
+import { setCart } from "../../store/cartSlice";
 
 const ProductItem = ({ item, onClick }) => {
-
+  const dispatch = useDispatch();
   const lang = i18n.language;
   const { t } = useTranslation();
   const handleCart = () => {
@@ -22,10 +24,10 @@ const ProductItem = ({ item, onClick }) => {
       weight: item.weight[0].value,
       category: item.category
     })
-
     toast.success('Product added to cart', {
       duration: 1500
     })
+    dispatch(setCart())
   }
 
   return (

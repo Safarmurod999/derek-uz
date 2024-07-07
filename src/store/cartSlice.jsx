@@ -8,6 +8,7 @@ const initialState = {
   phone_number: '',
   cart: JSON.parse(localStorage.getItem("cartItems")) || [],
   total: 0,
+  cartLength: JSON.parse(localStorage.getItem("cartItems"))?.length || 0,
 };
 
 export const addData = createAsyncThunk(
@@ -43,6 +44,7 @@ const cartSlice = createSlice({
       initialState.total = 0;
       initialState.name = '';
       initialState.phone_number = '';
+      initialState.cartLength = 0;
       localStorage.removeItem("cartItems");
     },
     removeItem: (initialState, action) => {
@@ -52,6 +54,7 @@ const cartSlice = createSlice({
       return {
         ...initialState,
         cart: tempCart,
+        cartLength: tempCart.length
       };
     },
     incrementQuantity: (initialState, { payload }) => {
@@ -119,21 +122,28 @@ const cartSlice = createSlice({
     setCart: (initialState) => {
       return {
         ...initialState,
-        cart: JSON.parse(localStorage.getItem("cartItems")) || []
+        cart: JSON.parse(localStorage.getItem("cartItems")) || [],
+        cartLength: JSON.parse(localStorage.getItem("cartItems"))?.length || 0
       }
     },
     setName: (initialState, { payload }) => {
-    
+
       return {
         ...initialState,
         name: payload
       }
     },
     setPhoneNumber: (initialState, { payload }) => {
-  
+
       return {
         ...initialState,
         phone_number: payload
+      }
+    },
+    getLength: (initialState, { payload }) => {
+      return {
+        ...initialState,
+        cartLength: payload.length
       }
     }
   },
@@ -145,8 +155,9 @@ const cartSlice = createSlice({
       .addCase(addData.fulfilled, (state, action) => {
         state.loading = false;
         state.cart = [];
-        state.name='';
-        state.phone_number='';
+        state.name = '';
+        state.phone_number = '';
+        state.cartLength = 0;
         localStorage.removeItem("cartItems");
       })
       .addCase(addData.rejected, (state) => {
@@ -165,7 +176,8 @@ export const {
   setQuanTity,
   setCart,
   setName,
-  setPhoneNumber
+  setPhoneNumber,
+  getLength
 } = cartSlice.actions;
 
 export default cartSlice.reducer;

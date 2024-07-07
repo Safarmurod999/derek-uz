@@ -3,9 +3,12 @@ import { Outlet } from 'react-router-dom'
 import { useFetch } from '../utils/utils';
 import { useEffect, useState } from 'react';
 import i18n from '../utils/i18n';
+import { useDispatch, useSelector } from 'react-redux';
+import { getLength } from '../store/cartSlice';
 
 const Layout = () => {
 
+    const { cartLength } = useSelector((store) => store.cart);
     const [lang, setLang] = useState(JSON.parse(localStorage.getItem('lang')) || 'ru');
 
     useEffect(() => {
@@ -20,15 +23,15 @@ const Layout = () => {
     if (error) {
         console.log(error);
     }
-
     const handleLang = (lang) => {
         setLang(lang);
         localStorage.setItem('lang', JSON.stringify(lang));
         i18n.changeLanguage(lang);
     }
+
     return (
         <>
-            <Header catalog={catalog} lang={lang} setLang={handleLang} />
+            <Header catalog={catalog} lang={lang} setLang={handleLang} cartLength={cartLength} />
             <main>
                 <Outlet />
             </main>
