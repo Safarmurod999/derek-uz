@@ -44,7 +44,7 @@ const Header = ({ catalog, lang, setLang }) => {
     {
       id: 2,
       title: t('header_2'),
-      path: '/partners',
+      path: '#brands',
       links: [
         { id: 0, title: 'CC', path: '/company#history' },
         { id: 1, title: 'ZI-F​' },
