@@ -7,6 +7,8 @@ import { useTranslation } from 'react-i18next';
 
 const Aside = ({ toggleFilter, setToggleFilter, setToggleSearch, weights, categories }) => {
 
+    
+
     const lang = i18n.language;
     const { t } = useTranslation();
 
