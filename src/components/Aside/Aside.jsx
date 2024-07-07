@@ -25,7 +25,7 @@ const Aside = ({ toggleFilter, setToggleFilter, setToggleSearch, weights, catego
     const [params, setParams] = useState(Object.fromEntries(searchParams.entries()))
 
     const handleCategory = (_category) => {
-        console.log('weight', searchParams.getAll('weight').length);
+
         if (_category == category) {
             searchParams.delete('category');
             setCategory('');

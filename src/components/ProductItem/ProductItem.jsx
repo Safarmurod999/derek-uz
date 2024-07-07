@@ -22,6 +22,7 @@ const ProductItem = ({ item, onClick }) => {
       weight: item.weight[0].value,
       category: item.category
     })
+
     toast.success('Product added to cart', {
       duration: 1500
     })

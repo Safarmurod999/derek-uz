@@ -111,13 +111,14 @@ const Cart = ({ isModalOpen, setIsModalOpen }) => {
                             duration: 1500
                         })
                         dispatch(addData({ apiEndpoint: '/orders/', newData }))
+                        setIsModalOpen(false)
                     }}>
                         <div className='form__content'>
                             <input className='form__input' type="text" placeholder={t('name')} name='name' value={name} onChange={(e) => dispatch(setName(e.target.value))} required />
                             <input className='form__input' type="text" placeholder='+998 ' name='mobile' value={phone_number} onChange={(e) => dispatch(setPhoneNumber(e.target.value))} required />
                         </div>
 
-                        <button type="submit">{t('order')}</button>
+                        <button type="submit" >{t('order')}</button>
                     </form>
                 </div>
             </div>

@@ -198,6 +198,8 @@ const Catalog = () => {
                                     filterArray.length ? (<div className="catalog__section--wrapper">
                                         {
                                             filterArray.map((product) => {
+                                 
+                                                product = productsArray.find(item => item.id == product.id);
                                                 return (
                                                     <ProductItem key={product.id} item={product} onClick={openModal} />
                                                 )

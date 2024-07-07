@@ -38,8 +38,6 @@ const ProductModal = ({ item, closeModal }) => {
     console.log(error);
   }
 
-
-  console.log(product);
   return (
     !loading && product && (<div className="modal">
       <div className="container">
@@ -93,8 +91,8 @@ const ProductModal = ({ item, closeModal }) => {
                   price: product?.price || 0,
                   quantity: quantity,
                   content: product?.content || '',
-                  weight: weight || 10,
-                  color: color || "A1",
+                  weight: product.weight[0].value || weight,
+                  color: product.color[0].name || color,
                   category: product?.category || 0,
                 })
               }}>{t('buy')}</button>

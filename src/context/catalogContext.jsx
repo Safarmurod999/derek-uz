@@ -17,7 +17,7 @@ const reducer = (state = initialValue, action) => {
 			return { ...state, term: payload }
 		case 'ON_FILTER':
 			{
-				console.log('payload', payload);
+				
 				return { ...state, filter: payload }
 			}
 		default:

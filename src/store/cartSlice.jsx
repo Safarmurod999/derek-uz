@@ -123,14 +123,14 @@ const cartSlice = createSlice({
       }
     },
     setName: (initialState, { payload }) => {
-      console.log({ name: payload });
+    
       return {
         ...initialState,
         name: payload
       }
     },
     setPhoneNumber: (initialState, { payload }) => {
-      console.log({ name: payload });
+  
       return {
         ...initialState,
         phone_number: payload

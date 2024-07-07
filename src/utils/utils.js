@@ -56,7 +56,7 @@ export function addToCart({
     image: image,
     price: price,
     quantity: quantity || 1,
-    weight: weight || ["10g"],
+    weight: weight || 10,
     color: color || "A1",
     category: category || 0,
   };
