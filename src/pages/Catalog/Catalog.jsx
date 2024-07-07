@@ -133,7 +133,7 @@ const Catalog = () => {
         setOffset((pageNumber - 1) * limit);
         setCurrentPage(pageNumber);
     };
-
+    let filterTerm = state.filter.length ? state.filter == 'default' || state.filter == 'descending' ? 'ascending' : 'descending' : 'default';
     const filterArray = filterHandler(searchHandler(state.data, state.term), state.filter);
     return (
         <>
@@ -163,11 +163,10 @@ const Catalog = () => {
                                         <path fillRule="evenodd" clipRule="evenodd" d="M16.7802 16.2803C16.6395 16.4209 16.4488 16.4999 16.2499 16.4999C16.0511 16.4999 15.8603 16.4209 15.7197 16.2803L13.0947 13.6553C12.9581 13.5139 12.8825 13.3244 12.8842 13.1278C12.8859 12.9311 12.9648 12.743 13.1038 12.6039C13.2429 12.4649 13.431 12.386 13.6276 12.3843C13.8243 12.3826 14.0137 12.4582 14.1552 12.5948L16.7802 15.2198C16.9208 15.3605 16.9998 15.5512 16.9998 15.7501C16.9998 15.9489 16.9208 16.1397 16.7802 16.2803Z" fill="#231F20" />
                                     </svg>
                                 </button>
-                                <button className='catalog__actions--btn'>
+                                <button className='catalog__actions--btn' onClick={() => dispatch({ type: 'ON_FILTER', payload: filterTerm })}>
                                     <svg width="19" height="18" viewBox="0 0 19 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M3.5 4.5H15.5M3.5 9H11M3.5 13.5H6.5" stroke="#231F20" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
                                     </svg>
-
                                 </button>
                             </div>
                             <div className={`catalog__search--bar ${toggleSearch ? 'toggle' : ''}`}>
