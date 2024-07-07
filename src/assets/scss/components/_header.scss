@@ -54,6 +54,12 @@
       @include flex-col(flex-end, center, 32px);
       background-color: var(--primary-light);
       z-index: 1000;
+      .header__menu--item {
+        padding: 0;
+        a {
+          margin: 0;
+        }
+      }
     }
     @media screen and (max-width: 450px) {
       width: 100%;
@@ -222,4 +228,9 @@
 .open {
   transition: 0.3s;
   top: -17px;
+  height: 100svh;
+  justify-content: flex-start;
+  @media screen and (max-width: 576px) {
+    height: auto;
+  }
 }
