@@ -20,7 +20,8 @@ const Catalog = () => {
     const [item, setItem] = useState({
         product: null
     });
-    const [term, setTerm] = useState('')
+    const [term, setTerm] = useState('');
+    const [debounceTimer, setDebounceTimer] = useState(null);
     const { state, dispatch } = useContext(Context)
 
     const updateTermHandler = e => {
@@ -51,24 +52,34 @@ const Catalog = () => {
         window.addEventListener('resize', handleResize);
         return () => window.removeEventListener('resize', handleResize);
     }, []);
+    const fetchData = async () => {
+        try {
+            setIsLoading(true);
+            await new Promise((resolve) => setTimeout(resolve, 3000));
+            const response = await fetch(`${BASE_URL}/products-list${queryString.length ? '/' + queryString : '/?'}${queryString.length ? `&limit=${limit}&offset=${offset}` : `limit=${limit}&offset=${offset}`}`);
 
+            const data = await response.json();
+            setItems(data);
+            dispatch({ type: 'GET_DATA', payload: data.results })
+            setIsLoading(false);
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
+    };
     useEffect(() => {
-        setTimeout(() => {
-            const fetchData = async () => {
-                try {
-                    setIsLoading(true);
-                    const response = await fetch(`${BASE_URL}/products-list${queryString.length ? '/' + queryString : '/?'}${queryString.length ? `&limit=${limit}&offset=${offset}` : `limit=${limit}&offset=${offset}`}`);
+        if (debounceTimer) {
+            clearTimeout(debounceTimer);
+        }
 
-                    const data = await response.json();
-                    setItems(data);
-                    dispatch({ type: 'GET_DATA', payload: data.results })
-                    setIsLoading(false);
-                } catch (error) {
-                    console.error('Error fetching data:', error);
-                }
-            };
+        const timer = setTimeout(() => {
             fetchData();
         }, 1500)
+
+        setDebounceTimer(timer);
+
+        // Clean up the timeout if the component unmounts or filters change
+        return () => clearTimeout(timer);
+
     }, [limit, offset, queryString]);
 
     useEffect(() => {
@@ -85,7 +96,7 @@ const Catalog = () => {
 
     const { data, loading, error } = useFetchMultipleAPIs(urls);
 
-    if (loading || isLoading) return <Spinner position="absolute" />;
+    if (loading) return <Spinner position="relative" />;
     if (error) return <div>Error: {error.message}</div>;
 
     if (items && data) {
@@ -181,23 +192,25 @@ const Catalog = () => {
                                 </form>
                             </div>
                         </div>
-                        {
-                            !loading && !isLoading && (
-                                filterArray.length ? (<div className="catalog__section--wrapper">
-                                    {
-                                        filterArray.map((product) => {
-                                            return (
-                                                <ProductItem key={product.id} item={product} onClick={openModal} />
-                                            )
-                                        })
-                                    }
-                                </div>)
-                                    :
-                                    (<div className='no-product'>
-                                        <p>Нет товаров</p>
+                        <div className="catalog__render">
+                            {
+                                !loading && !isLoading ? (
+                                    filterArray.length ? (<div className="catalog__section--wrapper">
+                                        {
+                                            filterArray.map((product) => {
+                                                return (
+                                                    <ProductItem key={product.id} item={product} onClick={openModal} />
+                                                )
+                                            })
+                                        }
                                     </div>)
-                            )
-                        }
+                                        :
+                                        (<div className='no-product'>
+                                            <p>Нет товаров</p>
+                                        </div>)
+                                ) : <Spinner position="relative" />
+                            }
+                        </div>
                         {
                             filterArray.length ? <Pagination
                                 totalItems={items.count}

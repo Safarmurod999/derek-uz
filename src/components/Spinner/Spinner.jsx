@@ -20,7 +20,7 @@ const Spinner = ({ className, position, md }) => {
 
 Spinner.propTypes = {
 	className: PropTypes.string,
-	position: PropTypes.oneOf(["center", "start", "end", "full", "absolute"])
+	position: PropTypes.oneOf(["center", "start", "end", "full", "absolute","relative"])
 };
 // Spinner.defaultProps = {
 // 	className: "",
