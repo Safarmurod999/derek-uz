@@ -55,6 +55,7 @@
     font-weight: 700;
     color: var(--text-color);
     margin-bottom: 13px;
+    text-transform: capitalize;
     @media screen and (max-width: 470px) {
       font-size: 12px;
       margin-bottom: 5px;

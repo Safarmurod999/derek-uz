@@ -1,30 +1,19 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Aside from '../../components/Aside/Aside'
 import ProductItem from '../../components/ProductItem/ProductItem'
 import useFetchMultipleAPIs from '../../utils/utils';
 import { Pagination, ProductModal, Spinner } from '../../components';
 import { BASE_URL } from '../../data/const';
-import { useSearchParams } from 'react-router-dom';
+import { useLocation, useSearchParams } from 'react-router-dom';
+import { Context } from '../../context/catalogContext';
+import { filterHandler, searchHandler } from '../../utils/filter';
 const Catalog = () => {
-    const [searchParams, setSearchParams] = useSearchParams();
-    const [filter, setFilter] = useState({
-        max_price: JSON.parse(searchParams.get('to')) || '',
-        min_price: JSON.parse(searchParams.get('from')) || '',
-        weight: JSON.parse(searchParams.get('weight')) || [],
-        category: searchParams.get('category') || '',
-    })
+    const location = useLocation();
+    let queryString = location.search;
 
-    let weightParams = '';
-
-    if (filter.weight.length) {
-        for (const el of filter.weight) {
-            weightParams += `weight=${el}&`;
-            weightParams.slice(0, -1);
-        }
-        console.log(weightParams);
-    }
     const [currentPage, setCurrentPage] = useState(1);
     const [offset, setOffset] = useState(0);
+
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [item, setItem] = useState({
         title: '',
@@ -36,6 +25,14 @@ const Catalog = () => {
         color: "A1",
         category: 0,
     });
+    const [term, setTerm] = useState('')
+    const { state, dispatch } = useContext(Context)
+
+    const updateTermHandler = e => {
+        const term = e.target.value.toLowerCase()
+        setTerm(term)
+        dispatch({ type: 'ON_TERM', payload: term })
+    }
 
     const [toggleFilter, setToggleFilter] = useState(false);
     const [toggleSearch, setToggleSearch] = useState(false);
@@ -64,20 +61,22 @@ const Catalog = () => {
         const fetchData = async () => {
             try {
                 setIsLoading(true);
+                const response = await fetch(`${BASE_URL}/products-list${queryString.length ? '/' + queryString : '/?'}${queryString.length ? `&limit=${limit}&offset=${offset}` : `limit=${limit}&offset=${offset}`}`);
 
-                const response = await fetch(`${BASE_URL}/products-list?limit=${limit}&offset=${offset}${filter.category && `&category=${filter.category}`}${filter.max_price && `&max_price=${filter.max_price}&min_price=${filter.min_price}`}&${weightParams}`); // Replace with your API URL
-                console.log(`${BASE_URL}/products-list?limit=${limit}&offset=${offset}${filter.category && `&category=${filter.category}`}${filter.max_price && `&max_price=${filter.max_price}&min_price=${filter.min_price}`}&${weightParams}`);
                 const data = await response.json();
                 setItems(data);
-                console.log(data);
+                dispatch({ type: 'GET_DATA', payload: data.results })
                 setIsLoading(false);
             } catch (error) {
                 console.error('Error fetching data:', error);
             }
         };
 
-        fetchData();
-    }, [limit, offset, filter.max_price]);
+        setTimeout(() => {
+            fetchData();
+        }, 1000)
+    }, [limit, offset, queryString]);
+
     useEffect(() => {
         const numItems = windowWidth > 768 ? 6 : 4;
         setLimit(numItems);
@@ -89,6 +88,7 @@ const Catalog = () => {
         '/products-color',
         '/products-weight',
     ];
+
 
     const { data, loading, error } = useFetchMultipleAPIs(urls);
 
@@ -127,11 +127,14 @@ const Catalog = () => {
         }
     }
 
+
+
     const paginate = (pageNumber) => {
         setOffset((pageNumber - 1) * limit);
         setCurrentPage(pageNumber);
     };
 
+    const filterArray = filterHandler(searchHandler(state.data, state.term), state.filter);
     return (
         <>
             {isModalOpen && <ProductModal closeModal={closeModal} item={item} />}
@@ -170,14 +173,17 @@ const Catalog = () => {
                             <div className={`catalog__search--bar ${toggleSearch ? 'toggle' : ''}`}>
                                 <form>
                                     <div>
-                                        <input type="text" placeholder="Поиск" className='catalog__search--input' />
+                                        <input type="text" placeholder="Поиск"
+                                            className='catalog__search--input'
+                                            name='search'
+                                            value={term} onChange={updateTermHandler} />
                                         <span onClick={() => setToggleFilter(!toggleFilter)}>
                                             <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <path d="M1 11L4.26087 7.73913M7.08696 1C6.57309 1 6.06425 1.10121 5.5895 1.29786C5.11475 1.49451 4.68338 1.78274 4.32002 2.1461C3.95666 2.50946 3.66842 2.94083 3.47178 3.41559C3.27513 3.89034 3.17391 4.39917 3.17391 4.91304C3.17391 5.42691 3.27513 5.93575 3.47178 6.4105C3.66842 6.88525 3.95666 7.31662 4.32002 7.67998C4.68338 8.04334 5.11475 8.33158 5.5895 8.52822C6.06425 8.72487 6.57309 8.82609 7.08696 8.82609C8.12476 8.82609 9.12006 8.41382 9.8539 7.67998C10.5877 6.94614 11 5.95085 11 4.91304C11 3.87524 10.5877 2.87994 9.8539 2.1461C9.12006 1.41227 8.12476 1 7.08696 1Z" stroke="black" strokeLinecap="round" strokeLinejoin="round" />
                                             </svg>
                                         </span>
                                     </div>
-                                    <select name="order" id="order">
+                                    <select name="order" id="order" onChange={(e) => dispatch({ type: 'ON_FILTER', payload: e.target.value })}>
                                         <option value="default">Порядок: по умолчанию</option>
                                         <option value="ascending">Порядок: восходящий</option>
                                         <option value="descending">Порядок: нисходящий</option>
@@ -187,9 +193,9 @@ const Catalog = () => {
                         </div>
                         {
                             !loading && !isLoading && (
-                                productsArray ? (<div className="catalog__section--wrapper">
+                                filterArray ? (<div className="catalog__section--wrapper">
                                     {
-                                        productsArray.map((product) => {
+                                        filterArray.map((product) => {
                                             return (
                                                 <ProductItem key={product.id} {...product} onClick={openModal} />
                                             )

@@ -43,10 +43,31 @@
           gap: 10px;
           font-size: 12px;
           margin-bottom: 11px;
+          cursor: pointer;
           p {
             margin-bottom: 0;
+            cursor: pointer;
+          }
+          label {
+            cursor: pointer;
           }
         }
+      }
+    }
+    &--clear {
+      margin-top: 20px;
+      button {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 12px;
+        font-weight: 600;
+        color: var(--black);
+        background-color: var(--white);
+        cursor: pointer;
+      }
+      p {
+        margin-bottom: 0;
       }
     }
   }
