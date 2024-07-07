@@ -18,15 +18,18 @@ const Aside = ({ toggleFilter, setToggleFilter, setToggleSearch, weights, catego
         Number(searchParams.get('max_price')) || 100000
     ]);
     const [category, setCategory] = useState(searchParams.get('category') || '');
-    const [weight, setWeight] = useState(searchParams.getAll('weight').length ? searchParams.getAll('weight') : '');
+    const [weight, setWeight] = useState( searchParams.getAll('weight')|| '');
 
     const [params, setParams] = useState(Object.fromEntries(searchParams.entries()))
 
-
     const handleCategory = (_category) => {
+        console.log('weight', searchParams.getAll('weight').length);
         if (_category == category) {
             searchParams.delete('category');
             setCategory('');
+            if (searchParams.getAll('weight').length) {
+                params.weight = weight
+            }
             setSearchParams(searchParams);
         } else {
             setCategory(_category);
@@ -45,7 +48,6 @@ const Aside = ({ toggleFilter, setToggleFilter, setToggleSearch, weights, catego
         params.max_price = value[1];
         if (searchParams.get('category')) {
             params.category = category
-
         }
         if (searchParams.getAll('weight')) {
             params.weight = weight

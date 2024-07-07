@@ -10,9 +10,8 @@ import { filterHandler, searchHandler } from '../../utils/filter';
 import { useTranslation } from 'react-i18next';
 const Catalog = () => {
     const { t } = useTranslation();
-
     const location = useLocation();
-    let queryString = location.search;
+    var queryString = location.search;
 
     const [currentPage, setCurrentPage] = useState(1);
     const [offset, setOffset] = useState(0);
@@ -54,21 +53,20 @@ const Catalog = () => {
     }, []);
 
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                setIsLoading(true);
-                const response = await fetch(`${BASE_URL}/products-list${queryString.length ? '/' + queryString : '/?'}${queryString.length ? `&limit=${limit}&offset=${offset}` : `limit=${limit}&offset=${offset}`}`);
-
-                const data = await response.json();
-                setItems(data);
-                dispatch({ type: 'GET_DATA', payload: data.results })
-                setIsLoading(false);
-            } catch (error) {
-                console.error('Error fetching data:', error);
-            }
-        };
-
         setTimeout(() => {
+            const fetchData = async () => {
+                try {
+                    setIsLoading(true);
+                    const response = await fetch(`${BASE_URL}/products-list${queryString.length ? '/' + queryString : '/?'}${queryString.length ? `&limit=${limit}&offset=${offset}` : `limit=${limit}&offset=${offset}`}`);
+
+                    const data = await response.json();
+                    setItems(data);
+                    dispatch({ type: 'GET_DATA', payload: data.results })
+                    setIsLoading(false);
+                } catch (error) {
+                    console.error('Error fetching data:', error);
+                }
+            };
             fetchData();
         }, 1500)
     }, [limit, offset, queryString]);
@@ -201,14 +199,14 @@ const Catalog = () => {
                             )
                         }
                         {
-                            filterArray.length && <Pagination
+                            filterArray.length ? <Pagination
                                 totalItems={items.count}
                                 itemsPerPage={limit}
                                 currentPage={currentPage}
                                 paginate={paginate}
                                 offset={offset}
                                 setOffset={setOffset}
-                            />
+                            /> : ''
                         }
                     </section>
                 </div>
