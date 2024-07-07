@@ -2,12 +2,13 @@ import { teamArray } from "../../data/const"
 import company_img from "../../assets/images/company_img.png"
 import { Cart, Title } from "../../components"
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 const Company = () => {
-
+    const { t } = useTranslation();
     return (
         <main className="company">
-            
+
             {/* Hero section */}
             <section id="history" className='hero'>
                 <div className="container">
@@ -16,26 +17,22 @@ const Company = () => {
                             <img src={company_img} alt='banner' />
                         </div>
                         <div className='hero__history'>
-                            <h2>ИСТОРИЯ DEREK</h2>
-                            <p>Lorem ipsum dolor sit amet consectetur. A eget hendrerit neque interdum arcu. Est
-                                suspendisse aliquet sagittis sollicitudin quis at vulputate porttitor leo. Vehicula
-                                egestas nisl dui phasellus vitae ante tortor fringilla rutrum. Auctor neque urna ipsum
-                                netus. Sed leo hac lorem sed facilisis habitasse hendrerit. Bibendum lorem adipiscing
-                                quis ac nunc fames sit. Commodo sit purus enim id at ut. </p>
+                            <h2>{t('history_derek')}</h2>
+                            <p>{t('company_text')} </p>
                         </div>
                         <div className='hero__statistics'>
                             <ul className='hero__statistics--list'>
                                 <li>
                                     <div>35+</div>
-                                    <p>Lorem ipsum dolor sit</p>
+                                    <p>{t('statistics_1')}</p>
                                 </li>
                                 <li>
                                     <div>1100+</div>
-                                    <p>Lorem ipsum dolor sit</p>
+                                    <p>{t('statistics_2')}</p>
                                 </li>
                                 <li>
                                     <div>600+</div>
-                                    <p>Lorem ipsum dolor sit</p>
+                                    <p>{t('statistics_3')}</p>
                                 </li>
                             </ul>
                         </div>
@@ -47,7 +44,7 @@ const Company = () => {
             {/* Team */}
             <section id="team" className='team'>
                 <div className="container">
-                    <Title>НАША КОМАНДА</Title>
+                    <Title>{t('our_team')}</Title>
                     <div className='team__list'>
                         {teamArray.map((item) => (
                             <div key={item.id} className='team__list--item'>
@@ -66,7 +63,7 @@ const Company = () => {
             <section id="contact" className='contact'>
                 <div className="container">
                     <div>
-                        <Title>КОНТАКТЫ</Title>
+                        <Title>{t('header_5')}</Title>
                         <div className='contact__wrapper'>
                             <div className='contact__map'>
                                 <iframe
@@ -77,17 +74,17 @@ const Company = () => {
 
                             <div className='contact__date'>
                                 <div className='contact__date-item'>
-                                    <p>Телефон:</p>
+                                    <p>{t('phone')}</p>
                                     <div>+998 71 111 11 11</div>
                                 </div>
 
                                 <div className='contact__date-item'>
-                                    <p>Адрес:</p>
+                                    <p>{t('address')}</p>
                                     <div>Baker street, 221</div>
                                 </div>
 
                                 <div className='contact__date-item'>
-                                    <p>Почта:</p>
+                                    <p>{t('mail')}</p>
                                     <div>info@derek.uz</div>
                                 </div>
 

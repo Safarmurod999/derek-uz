@@ -12,12 +12,18 @@
       p {
         font-size: 20px;
         font-weight: 600;
+        &::first-letter {
+          text-transform: uppercase;
+        }
       }
     }
     &--answer {
       display: none;
       padding-top: 20px;
       transition: 0.3s;
+      &::first-letter {
+        text-transform: uppercase;
+      }
     }
   }
 }

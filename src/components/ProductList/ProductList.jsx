@@ -8,7 +8,7 @@ const ProductList = ({productArray}) => {
                 productArray.map((product,index) => {
                     if (index <= 2) {
                         return (
-                            <ProductCard key={product.id} {...product} />
+                            <ProductCard key={product.id} item={product} />
                         )
                     }
                 })

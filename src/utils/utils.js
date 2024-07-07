@@ -31,10 +31,14 @@ const useFetchMultipleAPIs = (urls) => {
 export default useFetchMultipleAPIs;
 
 export function addToCart({
-  title,
   image,
   price,
+  title,
+  title_ru,
+  title_en,
   content,
+  content_ru,
+  content_en,
   color,
   weight,
   category,
@@ -44,10 +48,14 @@ export function addToCart({
   let item = {
     id: cartItems.at(-1)?.id + 1 || 1,
     title: title,
+    title_ru: title_ru,
+    title_en: title_en,
+    content: content,
+    content_ru: content_ru,
+    content_en: content_en,
     image: image,
     price: price,
     quantity: quantity || 1,
-    content: content,
     weight: weight || ["10g"],
     color: color || "A1",
     category: category || 0,

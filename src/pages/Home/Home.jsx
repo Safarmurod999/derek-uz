@@ -20,8 +20,12 @@ import ProductModal from "../../components/ProductModal/ProductModal";
 
 // Fetching data
 import useFetchMultipleAPIs from "../../utils/utils";
+import i18n from "../../utils/i18n";
+import { useTranslation } from "react-i18next";
 
 const Home = () => {
+  const lang = i18n.language;
+  const { t } = useTranslation();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [item, setItem] = useState({
     title: '',
@@ -33,7 +37,6 @@ const Home = () => {
     color: "A1",
     category: 0,
   });
-
 
   const openModal = (item) => {
     setItem(item)
@@ -90,8 +93,6 @@ const Home = () => {
     });
   }
 
-
-
   return (
     !loading && (
       <>
@@ -125,13 +126,13 @@ const Home = () => {
                       </div>
                       <div className="home__main">
                         <div className="home__title">
-                          {item.title}
+                          {lang == 'ru' ? item.title : item[`title_${lang}`]}
                         </div>
                         <p className="home__text">
-                          {item.subtitle}
+                          {lang == 'ru' ? item.subtitle : item[`subtitle_${lang}`]}
                         </p>
                         <Link to={'/catalog'} className="home__btn">
-                          Каталог
+                          {t('catalog')}
                         </Link>
                       </div>
                     </SwiperSlide>
@@ -146,7 +147,7 @@ const Home = () => {
         <section id="bestsellers" className="bestsellers">
           <div className="container">
             <Title>
-              Бест селлер
+              {t('bestsellers')}
             </Title>
             <ProductList productArray={data[1]?.results} />
           </div>
@@ -156,8 +157,8 @@ const Home = () => {
         <section id="products" className="products">
           <div className="container">
             <div className="products__top">
-              <Title>ТОВАРЫ</Title>
-              <TopLink title={'Все товары'} link={'/catalog'} />
+              <Title> {t('products')}</Title>
+              <TopLink title={t('all_products')} link={'/catalog'} />
             </div>
             <ProductSlider productArray={productsArray} onClick={openModal} />
           </div>
@@ -167,8 +168,8 @@ const Home = () => {
         <section id="brands" className="brands">
           <div className="container">
             <div className="brands__top">
-              <Title>БРЕНДЫ</Title>
-              <TopLink title={'Все бренды'} link={'/brands'} />
+              <Title> {t('brands')}</Title>
+              <TopLink title={t('all_brands')} link={'/brands'} />
             </div>
             <BrandList brandArray={data[2]} />
           </div>
@@ -179,22 +180,20 @@ const Home = () => {
           <div className="container">
             <div className="about__main">
               <div className="about__title">
-                Lorem ipsum lorem ipsum lorem
+                {t('about_title')}
               </div>
               <p className="about__text">
-                Lorem ipsum dolor sit amet consectetur. Nunc varius
-                sit non venenatis dignissim felis phasellus.
-                Lobortis amet nunc aliquam tincidunt purus sed faucibus.
+                {t('about_text')}
               </p>
               <Link to={'/company'} className="about__btn">
-                Подробнее
+                {t('more')}
               </Link>
             </div>
             <div className="about__images">
               <div className="about__images--text">
-                <p>Lorem ipsum dolor sit amet consectetur. Nunc varius
-                  sit non venenatis dignissim felis phasellus.
-                  Lobortis amet nunc aliquam tincidunt purus sed faucibus. </p>
+                <p>
+                  {t('about_right')}
+                </p>
               </div>
               <div className="about__images--wrapper">
                 <div className="about__image">
@@ -212,7 +211,7 @@ const Home = () => {
         <section id="faq" className="faq">
           <div className="container">
             <Title>
-              ЧАСТО ЗАДАВАЕМЫЕ ВОПРОСЫ
+              {t('faqs')}
             </Title>
             <Accordion accordionArray={data[3]} />
           </div>

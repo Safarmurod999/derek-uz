@@ -32,7 +32,7 @@ const ProductSlider = ({productArray,onClick}) => {
                     productArray.map((product) => {
                         return (
                             <SwiperSlide key={product.id}>
-                                <ProductItem {...product} onClick={onClick} />
+                                <ProductItem item={product} onClick={onClick} />
                             </SwiperSlide>
 
                         )

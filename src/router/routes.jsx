@@ -1,11 +1,12 @@
 import { Suspense, lazy } from "react";
 import { Route, Routes } from "react-router-dom";
-import { Layout } from "../pages/index";
+import { Catalog, Company, Home, Layout } from "../pages/index";
 import { Spinner } from "../components";
+// import useUrlLang from "../utils/useUrlLang";
 
-const Home = lazy(() => import("../pages/Home/Home"));
-const Catalog = lazy(() => import("../pages/Catalog/Catalog"));
-const Company = lazy(() => import("../pages/Company/Company"));
+// const Home = lazy(() => import("../pages/Home/Home"));
+// const Catalog = lazy(() => import("../pages/Catalog/Catalog"));
+// const Company = lazy(() => import("../pages/Company/Company"));
 
 export const routesArr = [
     {
@@ -24,7 +25,6 @@ export const routesArr = [
         element: Company,
     },
 ];
-
 const Router = () => {
     return (
         <Routes>

@@ -7,7 +7,7 @@ const Accordion = ({accordionArray}) => {
         <ul className='accordion'>
             {
                 accordionArray.map((item) => (
-                    <AccordionItem key={item.id} {...item} />
+                    <AccordionItem key={item.id} item={item} />
                 ))
             }
         </ul>

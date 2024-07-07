@@ -1,32 +1,37 @@
+// import i18n from "./i18n";
+
 const searchHandler = (arr, term) => {
+  const lang = JSON.parse(localStorage.getItem("lang"));
   if (term === 0) {
     return arr;
   }
-
-  return arr.filter((item) => item.title.toLowerCase().indexOf(term) > -1);
+  return arr.filter((item) => {
+    if (lang == "ru") {
+      return item.title.toLowerCase().indexOf(term.toLowerCase()) > -1;
+    } else {
+      return item.title_en.toLowerCase().indexOf(term.toLowerCase()) > -1;
+    }
+  });
 };
 
 const filterHandler = (arr, filter) => {
+  const lang = JSON.parse(localStorage.getItem("lang"));
   switch (filter) {
     case "ascending":
       return arr.sort((a, b) => {
-        if (a.title.toLowerCase() < b.title.toLowerCase()) {
-          return -1;
+        if (lang == "ru") {
+          return a.title_ru.localeCompare(b.title_ru, "ru", { sensitivity: "base" });
+        } else {
+          return a.title_en.localeCompare(b.title_en, "en", { sensitivity: "base" });
         }
-        if (a.title.toLowerCase() > b.title.toLowerCase()) {
-          return 1;
-        }
-        return 0;
       });
     case "descending":
       return arr.sort((a, b) => {
-        if (a.title.toLowerCase() > b.title.toLowerCase()) {
-          return -1;
+        if (lang == "ru") {
+          return b.title_ru.localeCompare(a.title_ru, "ru", { sensitivity: "base" });
+        } else {
+          return b.title_en.localeCompare(a.title_en, "en", { sensitivity: "base" });
         }
-        if (a.title.toLowerCase() < b.title.toLowerCase()) {
-          return 1;
-        }
-        return 0;
       });
     default:
       return arr;

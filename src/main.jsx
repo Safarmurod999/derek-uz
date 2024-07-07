@@ -5,6 +5,7 @@ import './index.scss'
 import { Provider } from 'react-redux'
 import { store } from './store/cartStore.jsx'
 import CatalogProvider from './context/catalogContext.jsx'
+import i18n from './utils/i18n.js'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>

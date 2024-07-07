@@ -7,52 +7,58 @@ import Dropdown from "../Dropdown/Dropdown"
 import Cart from "../Cart/Cart"
 import { useDispatch } from "react-redux"
 import { setCart } from "../../store/cartSlice"
-import { handleDownload, useFetch } from "../../utils/utils"
-import Spinner from "../Spinner/Spinner"
-const dropArray = [
-  {
-    id: 0,
-    title: 'О компании',
-    path: '/company',
-    links: [
-      { id: 0, title: 'История', path: '/company#history' },
-      { id: 1, title: 'Команда', path: '/company#team' },
-      { id: 2, title: 'Контакты', path: '/company#contact' }
-    ]
-  },
-  {
-    id: 1,
-    title: 'Каталог',
-    path: '/catalog',
-    links: [
-      { id: 0, title: 'Creation W.G.' },
-      { id: 1, title: 'Shera' },
-      { id: 2, title: 'Candulor' },
-      { id: 3, title: 'Asiga' },
-      { id: 4, title: 'Hasbio' },
-      { id: 5, title: 'ZirkonZahn' },
-    ]
-  },
-  {
-    id: 2,
-    title: 'Партнеры',
-    path: '/partners',
-    links: [
-      { id: 0, title: 'CC', path: '/company#history' },
-      { id: 1, title: 'ZI-F​' },
-      { id: 2, title: 'ZI-CT​' },
-      { id: 3, title: 'LS/LS Press​' },
-    ]
-  }
-]
+import { handleDownload } from "../../utils/utils"
 
-const Header = ({catalog}) => {
+import i18n from "../../utils/i18n"
+import { useTranslation } from "react-i18next"
+
+
+const Header = ({ catalog, lang, setLang }) => {
+
+  const { t } = useTranslation();
+
+  const dropArray = [
+    {
+      id: 0,
+      title: t('header_1'),
+      path: '/company',
+      links: [
+        { id: 0, title: t('header_3'), path: '/company#history' },
+        { id: 1, title: t('header_4'), path: '/company#team' },
+        { id: 2, title: t('header_5'), path: '/company#contact' }
+      ]
+    },
+    {
+      id: 1,
+      title: t('catalogs'),
+      path: '/catalog',
+      links: [
+        { id: 0, title: 'Creation W.G.' },
+        { id: 1, title: 'Shera' },
+        { id: 2, title: 'Candulor' },
+        { id: 3, title: 'Asiga' },
+        { id: 4, title: 'Hasbio' },
+        { id: 5, title: 'ZirkonZahn' },
+      ]
+    },
+    {
+      id: 2,
+      title: t('header_2'),
+      path: '/partners',
+      links: [
+        { id: 0, title: 'CC', path: '/company#history' },
+        { id: 1, title: 'ZI-F​' },
+        { id: 2, title: 'ZI-CT​' },
+        { id: 3, title: 'LS/LS Press​' },
+      ]
+    }
+  ]
 
   const [openNavbar, setOpenNavbar] = useState(false)
   const [show, setShow] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  
+
 
   const controlNavbar = () => {
     if (typeof window !== "undefined") {
@@ -64,7 +70,6 @@ const Header = ({catalog}) => {
       setLastScrollY(window.scrollY);
     }
   };
-
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -101,26 +106,34 @@ const Header = ({catalog}) => {
             }
 
             <div className="header__menu--item menu--item">
-              <a href="https://derek.itlink.uz/media/products/contract_oBYJXbD.pdf" download={'derek-uz'} target="_blank" rel="noopener noreferrer">Загрузки</a>
+              <a href="https://derek.itlink.uz/media/products/contract_oBYJXbD.pdf" download={'derek-uz'} target="_blank" rel="noopener noreferrer">{t('downloads')}</a>
             </div>
             <div className="header__menu--item menu--item" onClick={toggleCart}>
-              <p>Корзина</p>
+              <p>{t('cart')}</p>
             </div>
 
-            <button className="header__menu--language">
-              <span>RU</span>
+            <div className="header__menu--language">
+              <span>{lang.toUpperCase()}</span>
               <svg width="9" height="5" viewBox="0 0 9 5" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M0.221634 0.210935C0.151406 0.277227 0.0956642 0.356098 0.0576245 0.442996C0.0195847 0.529894 -1.9132e-07 0.623101 -1.87205e-07 0.717239C-1.83091e-07 0.811378 0.0195848 0.904584 0.0576245 0.991483C0.0956643 1.07838 0.151406 1.15725 0.221634 1.22354L3.96801 4.78906C4.03767 4.8559 4.12054 4.90895 4.21185 4.94516C4.30315 4.98136 4.40109 5 4.5 5C4.59891 5 4.69685 4.98136 4.78815 4.94516C4.87946 4.90895 4.96233 4.8559 5.03199 4.78906L8.77836 1.22354C8.84859 1.15725 8.90434 1.07838 8.94238 0.991482C8.98042 0.904584 9 0.811377 9 0.717239C9 0.623101 8.98042 0.529894 8.94238 0.442996C8.90434 0.356097 8.84859 0.277227 8.77836 0.210935C8.70871 0.144097 8.62584 0.091046 8.53453 0.0548426C8.44323 0.0186392 8.34529 1.12053e-07 8.24638 1.16376e-07C8.14747 1.207e-07 8.04953 0.0186392 7.95823 0.0548426C7.86692 0.091046 7.78405 0.144097 7.71439 0.210935L4.5 3.27728L1.28561 0.210935C1.21595 0.144097 1.13308 0.0910463 1.04177 0.0548429C0.950468 0.0186395 0.852534 4.39572e-07 0.75362 4.43895e-07C0.654707 4.48219e-07 0.556772 0.0186395 0.465466 0.0548429C0.37416 0.0910463 0.291289 0.144097 0.221634 0.210935Z" fill="#231F20" />
               </svg>
-            </button>
+              <ul className="header__language--list">
+                <li onClick={() => { localStorage.setItem("lang", "ru"); setLang('ru') }}>RU</li>
+                <li onClick={() => { localStorage.setItem("lang", "en"); setLang('en') }}>EN</li>
+              </ul>
+            </div>
           </div>
           <div className="header__actions">
-            <button className="header__actions--button header__language">
-              <span>RU</span>
+            <div className="header__actions--button header__language">
+              <span>{lang.toUpperCase()}</span>
               <svg width="9" height="5" viewBox="0 0 9 5" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M0.221634 0.210935C0.151406 0.277227 0.0956642 0.356098 0.0576245 0.442996C0.0195847 0.529894 -1.9132e-07 0.623101 -1.87205e-07 0.717239C-1.83091e-07 0.811378 0.0195848 0.904584 0.0576245 0.991483C0.0956643 1.07838 0.151406 1.15725 0.221634 1.22354L3.96801 4.78906C4.03767 4.8559 4.12054 4.90895 4.21185 4.94516C4.30315 4.98136 4.40109 5 4.5 5C4.59891 5 4.69685 4.98136 4.78815 4.94516C4.87946 4.90895 4.96233 4.8559 5.03199 4.78906L8.77836 1.22354C8.84859 1.15725 8.90434 1.07838 8.94238 0.991482C8.98042 0.904584 9 0.811377 9 0.717239C9 0.623101 8.98042 0.529894 8.94238 0.442996C8.90434 0.356097 8.84859 0.277227 8.77836 0.210935C8.70871 0.144097 8.62584 0.091046 8.53453 0.0548426C8.44323 0.0186392 8.34529 1.12053e-07 8.24638 1.16376e-07C8.14747 1.207e-07 8.04953 0.0186392 7.95823 0.0548426C7.86692 0.091046 7.78405 0.144097 7.71439 0.210935L4.5 3.27728L1.28561 0.210935C1.21595 0.144097 1.13308 0.0910463 1.04177 0.0548429C0.950468 0.0186395 0.852534 4.39572e-07 0.75362 4.43895e-07C0.654707 4.48219e-07 0.556772 0.0186395 0.465466 0.0548429C0.37416 0.0910463 0.291289 0.144097 0.221634 0.210935Z" fill="#231F20" />
               </svg>
-            </button>
+              <ul className="header__language--list">
+                <li onClick={() => { localStorage.setItem("lang", "ru"); setLang('ru') }}>RU</li>
+                <li onClick={() => { localStorage.setItem("lang", "en"); setLang('en') }}>EN</li>
+              </ul>
+            </div>
             <button className="header__actions--button header__actions--item" onClick={(e) => {
               e.preventDefault();
               handleDownload(catalog)

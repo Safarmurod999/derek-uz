@@ -1,9 +1,16 @@
 import { Footer, Header, Spinner } from '../components/index'
 import { Outlet } from 'react-router-dom'
 import { useFetch } from '../utils/utils';
+import { useEffect, useState } from 'react';
+import i18n from '../utils/i18n';
 
 const Layout = () => {
 
+    const [lang, setLang] = useState(JSON.parse(localStorage.getItem('lang')) || 'ru');
+
+    useEffect(() => {
+        i18n.changeLanguage(lang);
+    }, [lang]);
 
     const { data: catalog, loading, error } = useFetch('/catalog-list');
 
@@ -14,9 +21,14 @@ const Layout = () => {
         console.log(error);
     }
 
+    const handleLang = (lang) => {
+        setLang(lang);
+        localStorage.setItem('lang', JSON.stringify(lang));
+        i18n.changeLanguage(lang);
+    }
     return (
         <>
-            <Header catalog={catalog}/>
+            <Header catalog={catalog} lang={lang} setLang={handleLang} />
             <main>
                 <Outlet />
             </main>

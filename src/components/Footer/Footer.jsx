@@ -1,45 +1,74 @@
+import { useTranslation } from "react-i18next";
 import logo from "../../assets/icons/logo.svg";
 const Footer = () => {
+  const { t } = useTranslation();
+  const dropArray = [
+    {
+      id: 0,
+      title: t('header_1'),
+      path: '/company',
+      links: [
+        { id: 0, title: t('header_3'), path: '/company#history' },
+        { id: 1, title: t('header_4'), path: '/company#team' },
+        { id: 2, title: t('header_5'), path: '/company#contact' }
+      ]
+    },
+    {
+      id: 1,
+      title: t('catalogs'),
+      path: '/catalog',
+      links: [
+        { id: 0, title: 'Creation W.G.' },
+        { id: 1, title: 'Shera' },
+        { id: 2, title: 'Candulor' },
+        { id: 3, title: 'Asiga' },
+        { id: 4, title: 'Hasbio' },
+        { id: 5, title: 'ZirkonZahn' },
+      ]
+    },
+    {
+      id: 2,
+      title: t('header_2'),
+      path: '/partners',
+      links: [
+        { id: 0, title: 'CC', path: '/company#history' },
+        { id: 1, title: 'ZI-F​' },
+        { id: 2, title: 'ZI-CT​' },
+        { id: 3, title: 'LS/LS Press​' },
+      ]
+    }
+  ]
   return (
     <footer className="footer" id="footer">
       <div className="container">
         <div>
           <a href="/"><img src={logo} alt="logo" className="footer__logo" /></a>
-          <p className="footer__description">Lorem ipsum dolor sit amet consectetur. Nunc varius sit
-            non venenatis dignissim felis phasellus. Lobortis amet
-            nunc aliquam tincidunt purus sed faucibus.
+          <p className="footer__description">
+            {t('footer_about')}
           </p>
-
-
         </div>
         <ul className="footer__list">
-          <li className="footer__list--item">
-            <p>О компании</p>
-            <ul className="footer__links">
-              <li>Lorem ipsum</li>
-              <li>Lorem ipsum</li>
-              <li>Lorem ipsum</li>
-              <li>Lorem ipsum</li>
-            </ul>
-          </li>
-          <li className="footer__list--item">
-            <p>Каталог</p>
-            <ul className="footer__links">
-              <li>Lorem ipsum</li>
-              <li>Lorem ipsum</li>
-              <li>Lorem ipsum</li>
-              <li>Lorem ipsum</li>
-            </ul>
-          </li>
-          <li className="footer__list--item">
-            <p>Партнеры</p>
-            <ul className="footer__links">
-              <li>Lorem ipsum</li>
-              <li>Lorem ipsum</li>
-              <li>Lorem ipsum</li>
-              <li>Lorem ipsum</li>
-            </ul>
-          </li>
+          {
+            dropArray.map((item,_index) => {
+              return (
+                <li key={_index} className="footer__list--item">
+                  <a href={item.path}>{item.title}</a>
+                  <ul className="footer__links">
+                    {
+                      item.links.map((link,index) => {
+                        return (
+                          <li key={index}>
+                            <a href={link.path}>{link.title}</a>
+                          </li>
+                        )
+                      })
+                    }
+                  </ul>
+                </li>
+              )
+            })
+          }
+
         </ul>
         <div className="footer__contacts">
           <div className="footer__contacts--col">
@@ -75,7 +104,7 @@ const Footer = () => {
       </div>
       <div className="container">
         <div className="footer__copy">
-          &copy; Все права защищены 2024
+          &copy; {t('copyright')} 2024
         </div>
       </div>
     </footer>

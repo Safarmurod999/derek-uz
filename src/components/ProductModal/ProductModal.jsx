@@ -1,10 +1,16 @@
 import React, { useState } from 'react';
-import product from '../../assets/images/modal-1.png';
-import { addToCart } from '../../utils/utils';
+import { addToCart, useFetch } from '../../utils/utils';
+import i18n from '../../utils/i18n';
+import { useTranslation } from 'react-i18next';
+import Spinner from '../Spinner/Spinner';
 const ProductModal = ({ item, closeModal }) => {
+  const lang = i18n.language;
+  const { t } = useTranslation();
+
+  const { data: product, loading, error } = useFetch(`/products-detail/${item.product}/`)
   const [quantity, setQuantity] = useState(1);
-  const [weight, setWeight] = useState(item.weight[0].value);
-  const [color, setColor] = useState(item.color[0].name);
+  const [weight, setWeight] = useState(0);
+  const [color, setColor] = useState(0);
 
   const handleQuantityChange = (e) => {
     if (quantity > 0) {
@@ -24,40 +30,35 @@ const ProductModal = ({ item, closeModal }) => {
       }
     }
   }
-  
-  console.log(quantity);
-  const handleCart = () => {
-    addToCart({
-      title: item.title,
-      image: item.image,
-      price: item.price,
-      quantity: quantity,
-      content: item.content,
-      weight: weight || 10,
-      color: color || "A1",
-      category: item.category || 0,
-    })
+
+  if (loading) {
+    return <Spinner position={'full'} />
+  }
+  if (error) {
+    console.log(error);
   }
 
+
+  console.log(product);
   return (
-    <div className="modal">
+    !loading && product && (<div className="modal">
       <div className="container">
         <div className="modal-content">
           <button className="close" onClick={closeModal}>&times;</button>
           <div className="product-image">
-            <img src={product} alt="Product" />
+            <img src={product.image} alt="Product" />
           </div>
           <div className="product-details">
-            <h2>{item.title}</h2>
+            <h2>{lang == 'ru' ? product.title : item[`title_${lang}`]}</h2>
             <p>
-              Артикул: {item.category}
+              {t('articles')}: {product.category}
             </p>
-            <span className="price">$ {item.price}</span>
+            <span className="price">$ {product.price}</span>
             <div className="color-options">
-              <label>Цвет:</label>
+              <label>{t('color')}</label>
               <div className="color-buttons">
                 {
-                  item.color.map((item, index) => {
+                  product.color.map((item, index) => {
                     return <button key={index}
                       onClick={() => setColor(item.name)}
                       className={color === item.name ? 'active' : ''}
@@ -69,11 +70,11 @@ const ProductModal = ({ item, closeModal }) => {
               </div>
             </div>
             <div className="weight-options">
-              <label>Масса:</label>
+              <label>{t('weight')}</label>
               <select onChange={(e) => setWeight(e.target.value)}>
                 {
-                  item.weight.map((item, index) => {
-                    return <option key={index} value={item.value}>{item.value} g</option>
+                  product.weight.map((item, index) => {
+                    return <option key={index} value={item.value}>{item.value} {lang == 'ru' ? 'г' : 'g'}</option>
                   }
                   )
                 }
@@ -85,15 +86,26 @@ const ProductModal = ({ item, closeModal }) => {
                 <input type="number" min={0} value={quantity} onChange={handleQuantityChange} />
                 <button onClick={() => handleChangeBtn("+")}>+</button>
               </div>
-              <button className="buy-button" onClick={handleCart}>Купить</button>
+              <button className="buy-button" onClick={() => {
+                addToCart({
+                  title: product?.title || '',
+                  image: product?.image || '',
+                  price: product?.price || 0,
+                  quantity: quantity,
+                  content: product?.content || '',
+                  weight: weight || 10,
+                  color: color || "A1",
+                  category: product?.category || 0,
+                })
+              }}>{t('buy')}</button>
             </div>
             <p className="description">
-              {item.content}
+              {lang == 'ru' ? product.content : item[`content_${lang}`]}
             </p>
           </div>
         </div>
       </div>
-    </div>
+    </div>)
   );
 };
 

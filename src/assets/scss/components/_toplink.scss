@@ -4,9 +4,13 @@
   border-radius: 10px;
   cursor: pointer;
   p {
+    
     padding-left: 15px;
     font-size: 14px;
     line-height: 16.8px;
+    &::first-letter {
+      text-transform: uppercase;
+    }
   }
   button {
     width: 40px;

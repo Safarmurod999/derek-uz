@@ -48,7 +48,8 @@
       margin-bottom: 16px;
     }
     &--item {
-      p {
+      a {
+        display: inline-block;
         font-size: 16px;
         line-height: 26px;
         font-weight: 700;
@@ -68,9 +69,12 @@
     }
 
     li {
-      font-size: 14px;
-      line-height: 16.8px;
-      font-weight: 600;
+      a {
+        font-size: 14px;
+        line-height: 16.8px;
+        font-weight: 600;
+        margin-bottom: 0;
+      }
     }
   }
   &__contacts {

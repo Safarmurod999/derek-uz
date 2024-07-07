@@ -4,10 +4,13 @@ import ProductItem from '../../components/ProductItem/ProductItem'
 import useFetchMultipleAPIs from '../../utils/utils';
 import { Pagination, ProductModal, Spinner } from '../../components';
 import { BASE_URL } from '../../data/const';
-import { useLocation, useSearchParams } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { Context } from '../../context/catalogContext';
 import { filterHandler, searchHandler } from '../../utils/filter';
+import { useTranslation } from 'react-i18next';
 const Catalog = () => {
+    const { t } = useTranslation();
+
     const location = useLocation();
     let queryString = location.search;
 
@@ -16,14 +19,7 @@ const Catalog = () => {
 
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [item, setItem] = useState({
-        title: '',
-        image: '',
-        price: 0,
-        quantity: 1,
-        content: '',
-        weight: ["10g"],
-        color: "A1",
-        category: 0,
+        product: null
     });
     const [term, setTerm] = useState('')
     const { state, dispatch } = useContext(Context)
@@ -74,7 +70,7 @@ const Catalog = () => {
 
         setTimeout(() => {
             fetchData();
-        }, 1000)
+        }, 1500)
     }, [limit, offset, queryString]);
 
     useEffect(() => {
@@ -88,7 +84,6 @@ const Catalog = () => {
         '/products-color',
         '/products-weight',
     ];
-
 
     const { data, loading, error } = useFetchMultipleAPIs(urls);
 
@@ -126,8 +121,6 @@ const Catalog = () => {
             });
         }
     }
-
-
 
     const paginate = (pageNumber) => {
         setOffset((pageNumber - 1) * limit);
@@ -172,7 +165,7 @@ const Catalog = () => {
                             <div className={`catalog__search--bar ${toggleSearch ? 'toggle' : ''}`}>
                                 <form>
                                     <div>
-                                        <input type="text" placeholder="Поиск"
+                                        <input type="text" placeholder={t('search')}
                                             className='catalog__search--input'
                                             name='search'
                                             value={term} onChange={updateTermHandler} />
@@ -183,34 +176,40 @@ const Catalog = () => {
                                         </span>
                                     </div>
                                     <select name="order" id="order" onChange={(e) => dispatch({ type: 'ON_FILTER', payload: e.target.value })}>
-                                        <option value="default">Порядок: по умолчанию</option>
-                                        <option value="ascending">Порядок: восходящий</option>
-                                        <option value="descending">Порядок: нисходящий</option>
+                                        <option value="default">{t('default')}</option>
+                                        <option value="ascending">{t('ascending')}</option>
+                                        <option value="descending">{t('descending')}</option>
                                     </select>
                                 </form>
                             </div>
                         </div>
                         {
                             !loading && !isLoading && (
-                                filterArray ? (<div className="catalog__section--wrapper">
+                                filterArray.length ? (<div className="catalog__section--wrapper">
                                     {
                                         filterArray.map((product) => {
                                             return (
-                                                <ProductItem key={product.id} {...product} onClick={openModal} />
+                                                <ProductItem key={product.id} item={product} onClick={openModal} />
                                             )
                                         })
                                     }
-                                </div>) : (<p>Нет товаров</p>)
+                                </div>)
+                                    :
+                                    (<div className='no-product'>
+                                        <p>Нет товаров</p>
+                                    </div>)
                             )
                         }
-                        <Pagination
-                            totalItems={items.count}
-                            itemsPerPage={limit}
-                            currentPage={currentPage}
-                            paginate={paginate}
-                            offset={offset}
-                            setOffset={setOffset}
-                        />
+                        {
+                            filterArray.length && <Pagination
+                                totalItems={items.count}
+                                itemsPerPage={limit}
+                                currentPage={currentPage}
+                                paginate={paginate}
+                                offset={offset}
+                                setOffset={setOffset}
+                            />
+                        }
                     </section>
                 </div>
             </main>

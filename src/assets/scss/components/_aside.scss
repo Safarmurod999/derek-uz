@@ -1,5 +1,7 @@
 .aside {
   max-width: 210px;
+  height: 100%;
+  padding-bottom: 20px;
   flex-grow: 1;
 
   @media screen and (max-width: 700px) {
@@ -30,7 +32,7 @@
     p {
       font-size: 12px;
       font-weight: 700;
-      margin-bottom: 20px;
+      margin-bottom: 15px;
     }
     &--item {
       margin-bottom: 15px;
@@ -45,6 +47,7 @@
           margin-bottom: 11px;
           cursor: pointer;
           p {
+            font-weight: 400;
             margin-bottom: 0;
             cursor: pointer;
           }
@@ -80,7 +83,7 @@
       margin-top: 6px;
       input {
         padding: 3px 6px;
-        width: 93px;
+        width: 83px;
         border: 1px solid #dddddd;
         background-color: #f8f8f8;
         font-size: 12px;
