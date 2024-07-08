@@ -96,7 +96,7 @@ const Header = ({ catalog, lang, setLang, cartLength }) => {
           <div className={`header__menu ${openNavbar ? 'open' : ''}`}>
             <div className="header__menu--actions">
               <a aria-label="logo small" href="/"><img src={logo_small} alt="Logo" /></a>
-              <button onClick={() => setOpenNavbar(false)}><img src={close} alt="close" /></button>
+              <button aria-label="close-btn" onClick={() => setOpenNavbar(false)}><img src={close} alt="close" /></button>
             </div>
 
             {
@@ -135,7 +135,7 @@ const Header = ({ catalog, lang, setLang, cartLength }) => {
                 <li onClick={() => { localStorage.setItem("lang", "en"); setLang('en') }}>EN</li>
               </ul>
             </div>
-            <button className="header__actions--button header__actions--item" onClick={(e) => {
+            <button aria-label="action-btn" className="header__actions--button header__actions--item" onClick={(e) => {
               e.preventDefault();
               handleDownload(catalog)
             }}>
@@ -143,7 +143,7 @@ const Header = ({ catalog, lang, setLang, cartLength }) => {
                 <path d="M12.6806 6.42647H11.0592V1.27941C11.0592 0.713235 10.6003 0.25 10.0394 0.25H5.9605C5.39965 0.25 4.94076 0.713235 4.94076 1.27941V6.42647H3.31938C2.41182 6.42647 1.95293 7.53824 2.59537 8.18677L7.27596 12.9118C7.67366 13.3132 8.31609 13.3132 8.71379 12.9118L13.3944 8.18677C14.0368 7.53824 13.5881 6.42647 12.6806 6.42647ZM0.861816 16.7206C0.861816 17.2868 1.3207 17.75 1.88155 17.75H14.1184C14.6793 17.75 15.1381 17.2868 15.1381 16.7206C15.1381 16.1544 14.6793 15.6912 14.1184 15.6912H1.88155C1.3207 15.6912 0.861816 16.1544 0.861816 16.7206Z" fill="#231F20" />
               </svg>
             </button>
-            <button className="header__actions--button header__actions--item header__download" onClick={() => {
+            <button aria-label="action-btn" className="header__actions--button header__actions--item header__download" onClick={() => {
               setOpenNavbar(false);
               toggleCart();
             }}>
@@ -154,7 +154,7 @@ const Header = ({ catalog, lang, setLang, cartLength }) => {
                 cartLength ? <p>{cartLength}</p> : ''
               }
             </button>
-            <button className="header__toggle" onClick={() => setOpenNavbar(true)}>
+            <button aria-label="action-btn" className="header__toggle" onClick={() => setOpenNavbar(true)}>
               <img src={menu} alt="menu" />
             </button>
           </div>

@@ -40,8 +40,8 @@ const ProductItem = ({ item, onClick }) => {
         <p className="card-text">{lang == 'ru' ? item.content : item[`content_${lang}`]}</p>
         <p className="card-price">${item.price}</p>
         <div className="card-actions">
-          <button className="card-btn" onClick={handleCart}>{t('add_cart')}</button>
-          <button className="card-btn" onClick={() => onClick({
+          <button aria-label="cart-btn" className="card-btn" onClick={handleCart}>{t('add_cart')}</button>
+          <button aria-label="card-btn" className="card-btn" onClick={() => onClick({
             product: item.id,
           })}>{t('more')}</button>
         </div>

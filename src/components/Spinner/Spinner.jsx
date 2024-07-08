@@ -22,9 +22,5 @@ Spinner.propTypes = {
 	className: PropTypes.string,
 	position: PropTypes.oneOf(["center", "start", "end", "full", "absolute","relative"])
 };
-// Spinner.defaultProps = {
-// 	className: "",
-// 	position: "center"
-// };
 
 export default Spinner;

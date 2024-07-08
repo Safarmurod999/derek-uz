@@ -46,7 +46,7 @@ const ProductModal = ({ item, closeModal }) => {
     !loading && product && (<div className="modal">
       <div className="container">
         <div className="modal-content">
-          <button className="close" onClick={closeModal}>&times;</button>
+          <button aria-label='close-btn' className="close" onClick={closeModal}>&times;</button>
           <div className="product-image">
             <img src={product.image} alt="Product" />
           </div>
@@ -61,7 +61,7 @@ const ProductModal = ({ item, closeModal }) => {
               <div className="color-buttons">
                 {
                   product.color.map((item, index) => {
-                    return <button key={index}
+                    return <button aria-label='color-btn' key={index}
                       onClick={() => setColor(item.name)}
                       className={color == item.name ? 'active' : ''}
                     >
@@ -84,11 +84,11 @@ const ProductModal = ({ item, closeModal }) => {
             </div>
             <div className="quantity-wrapper">
               <div className="quantity-control">
-                <button onClick={() => handleChangeBtn("-")}>-</button>
+                <button aria-label='minus-btn' onClick={() => handleChangeBtn("-")}>-</button>
                 <input type="number" min={0} value={quantity} onChange={handleQuantityChange} />
-                <button onClick={() => handleChangeBtn("+")}>+</button>
+                <button aria-label='plus-btn' onClick={() => handleChangeBtn("+")}>+</button>
               </div>
-              <button className="buy-button" onClick={() => {
+              <button aria-label='buy-btn' className="buy-button" onClick={() => {
                 addToCart({
                   title: product?.title || '',
                   image: product?.image || '',

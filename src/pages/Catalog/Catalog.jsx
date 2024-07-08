@@ -152,7 +152,7 @@ const Catalog = () => {
                     <section className='catalog__section'>
                         <div className="catalog__search">
                             <div className="catalog__actions">
-                                <button className='catalog__actions--btn' onClick={() => {
+                                <button aria-label='filter-btn' className='catalog__actions--btn' onClick={() => {
                                     setToggle({
                                         filter: !toggle.filter,
                                         search: false,
@@ -164,7 +164,7 @@ const Catalog = () => {
                                     </svg>
                                     <p>Фильтр</p>
                                 </button>
-                                <button className='catalog__actions--btn' onClick={() => {
+                                <button aria-label='search-btn' className='catalog__actions--btn' onClick={() => {
                                     setToggle({
                                         filter: false,
                                         search: !toggle.search,
@@ -178,7 +178,7 @@ const Catalog = () => {
                                         <path fillRule="evenodd" clipRule="evenodd" d="M16.7802 16.2803C16.6395 16.4209 16.4488 16.4999 16.2499 16.4999C16.0511 16.4999 15.8603 16.4209 15.7197 16.2803L13.0947 13.6553C12.9581 13.5139 12.8825 13.3244 12.8842 13.1278C12.8859 12.9311 12.9648 12.743 13.1038 12.6039C13.2429 12.4649 13.431 12.386 13.6276 12.3843C13.8243 12.3826 14.0137 12.4582 14.1552 12.5948L16.7802 15.2198C16.9208 15.3605 16.9998 15.5512 16.9998 15.7501C16.9998 15.9489 16.9208 16.1397 16.7802 16.2803Z" fill="#231F20" />
                                     </svg>
                                 </button>
-                                <button className={`catalog__actions--btn`} onClick={() => {
+                                <button aria-label='sort-btn' className={`catalog__actions--btn`} onClick={() => {
                                     setToggle({
                                         filter: false,
                                         search: false,

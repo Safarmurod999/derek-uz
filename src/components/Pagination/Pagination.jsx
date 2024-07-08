@@ -12,7 +12,7 @@ const Pagination = ({ itemsPerPage, totalItems, paginate, currentPage, offset, s
             <ul className="pagination-wrapper">
                 {pageNumbers.map((number) => (
                     <li key={number} className={`page-item ${currentPage === number ? 'active' : ''}`}>
-                        <button onClick={() => paginate(number)} className="page-link">
+                        <button aria-label='page-btn' onClick={() => paginate(number)} className="page-link">
                             {number}
                         </button>
                     </li>
