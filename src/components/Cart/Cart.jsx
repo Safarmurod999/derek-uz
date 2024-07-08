@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect} from 'react'
 
 import cartImage from '@/assets/images/product-mini.png';
 import { addData, calculateTotals, clearCart, decrementQuantity, incrementQuantity, removeItem, setCart, setName, setPhoneNumber, setQuanTity } from '../../store/cartSlice';

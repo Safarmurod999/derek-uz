@@ -3,8 +3,7 @@ import { Outlet } from 'react-router-dom'
 import { useFetch } from '../utils/utils';
 import { useEffect, useState } from 'react';
 import i18n from '../utils/i18n';
-import { useDispatch, useSelector } from 'react-redux';
-import { getLength } from '../store/cartSlice';
+import { useSelector } from 'react-redux';
 
 const Layout = () => {
 
