@@ -1,11 +1,8 @@
 @import "base/mixins";
 
-@include font-face("RF Dewi", "RFDewiExtended-Thin.ttf", "truetype", 200);
-@include font-face("RF Dewi", "RFDewiExtended-Light.ttf", "truetype", 300);
 @include font-face("RF Dewi", "RFDewiExtended-Regular.ttf", "truetype", 400);
 @include font-face("RF Dewi", "RFDewiExtended-Semibold.ttf", "truetype", 600);
 @include font-face("RF Dewi", "RFDewiExtended-Bold.ttf", "truetype", 700);
-@include font-face("RF Dewi", "RFDewiExtended-Black.ttf", "truetype", 900);
 
 :root {
   --font-primary: "RF Dewi", sans-serif;

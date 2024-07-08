@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react'
 
-import cartImage from '@/assets/images/product-mini.png';
 import { addData, calculateTotals, clearCart, decrementQuantity, incrementQuantity, removeItem, setCart, setName, setPhoneNumber, setQuanTity } from '../../store/cartSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'sonner';
@@ -54,7 +53,7 @@ const Cart = ({ isModalOpen, setIsModalOpen }) => {
                                 <div className='cart__item--top'>
                                     <div className='cart__left'>
                                         <div className="cart__image">
-                                            <img src={cartImage} alt='' />
+                                            <img src={item.image} alt='' />
                                         </div>
                                         <div className="cart__item--name">
                                             <strong>{lang == 'ru' ? item.title : item[`title_${lang}`]}</strong>
