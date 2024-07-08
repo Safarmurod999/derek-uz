@@ -4,8 +4,7 @@ const Dropdown = ({ path, title, style, links, setOpenNavbar }) => {
   const navigate = useNavigate();
   return (
     <div className={`dropdown ${style}`}>
-      <a href={path} onClick={(e) => {
-        // e.preventDefault();
+      <a aria-label="dropdown" href={path} onClick={(e) => {
         navigate(path);
         setOpenNavbar(false);
       }} className={`dropdown__button `}>
@@ -14,7 +13,7 @@ const Dropdown = ({ path, title, style, links, setOpenNavbar }) => {
       <div className="dropdown__content">
         {
           links.map((link) => {
-            return <a key={link.id} href={link.path} >{link.title}</a>
+            return <a aria-label="dropdown-link" key={link.id} href={link.path} >{link.title}</a>
           })
         }
       </div>

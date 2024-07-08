@@ -90,12 +90,12 @@ const Header = ({ catalog, lang, setLang, cartLength }) => {
     <header className={`header`}>
       <nav className="header__nav">
         <div className={`container ${!show && 'shrink'}`}>
-          <a href="/" className="header__logo">
+          <a aria-label="logo" href="/" className="header__logo">
             <img src={logo} alt="Logo" />
           </a>
           <div className={`header__menu ${openNavbar ? 'open' : ''}`}>
             <div className="header__menu--actions">
-              <a href="/"><img src={logo_small} alt="Logo" /></a>
+              <a aria-label="logo small" href="/"><img src={logo_small} alt="Logo" /></a>
               <button onClick={() => setOpenNavbar(false)}><img src={close} alt="close" /></button>
             </div>
 
@@ -105,7 +105,7 @@ const Header = ({ catalog, lang, setLang, cartLength }) => {
               })
             }
             <div className="header__menu--item menu--item">
-              <a href="https://derek.itlink.uz/media/products/contract_oBYJXbD.pdf" download={'derek-uz'} target="_blank" rel="noopener noreferrer">{t('downloads')}</a>
+              <a aria-label="menu item" href="https://derek.itlink.uz/media/products/contract_oBYJXbD.pdf" download={'derek-uz'} target="_blank" rel="noopener noreferrer">{t('downloads')}</a>
             </div>
             <div className="header__menu--item menu--item" onClick={() => {
               setOpenNavbar(false);
