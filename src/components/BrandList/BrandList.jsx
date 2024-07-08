@@ -1,9 +1,9 @@
-// import { brandArray } from "../../data/const"
+
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 const BrandList = ({ brandArray }) => {
     return (
-        <ul className="brand__list">
+        <div className="brand__list">
             <Swiper
                 slidesPerView={'auto'}
                 spaceBetween={20}
@@ -25,16 +25,16 @@ const BrandList = ({ brandArray }) => {
                     brandArray.map((brand) => {
                         return (
                             <SwiperSlide key={brand.id}>
-                                <li key={brand.id} className="brand__list--item">
+                                <div key={brand.id} className="brand__list--item">
                                     <img src={brand.brands} alt={brand.name} />
-                                </li>
+                                </div>
                             </SwiperSlide>
 
                         )
                     })
                 }
             </Swiper>
-        </ul>
+        </div>
     )
 }
 

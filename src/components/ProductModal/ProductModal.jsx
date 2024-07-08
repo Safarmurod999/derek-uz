@@ -63,7 +63,7 @@ const ProductModal = ({ item, closeModal }) => {
                   product.color.map((item, index) => {
                     return <button key={index}
                       onClick={() => setColor(item.name)}
-                      className={color === item.name ? 'active' : ''}
+                      className={color == item.name ? 'active' : ''}
                     >
                       {item.name}
                     </button>

@@ -99,7 +99,7 @@ const Footer = () => {
             <p>+998 71 111 11 11</p>
             <p>info@derek.uz</p>
           </div>
-          <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d11985.553800599746!2d69.22858220344239!3d41.3221657831688!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2s!4v1719667644203!5m2!1sen!2s" width="600" height="450" allowFullScreen="" loading="lazy" referrerPolicy="no-referrer-when-downgrade"></iframe>
+          <iframe title="Derek location" src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d11985.553800599746!2d69.22858220344239!3d41.3221657831688!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2s!4v1719667644203!5m2!1sen!2s" width="600" height="450" allowFullScreen="" loading="lazy" referrerPolicy="no-referrer-when-downgrade"></iframe>
         </div>
       </div>
       <div className="container">

@@ -9,8 +9,6 @@ import 'swiper/css/effect-fade';
 import { Autoplay, EffectFade } from 'swiper/modules';
 
 // Images
-import home_main from '../../assets/images/home-1.png'
-import home_2 from '../../assets/images/home-2.png';
 import about_1 from '../../assets/images/about-1.png';
 import about_2 from '../../assets/images/about-2.png';
 

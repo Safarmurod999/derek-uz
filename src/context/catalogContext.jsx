@@ -3,7 +3,7 @@ import { createContext, useReducer } from 'react'
 const initialValue = {
 	data: [],
 	term: '',
-	filter: '',
+	filter: 'default',
 }
 
 export const Context = createContext()

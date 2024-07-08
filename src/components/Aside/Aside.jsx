@@ -5,9 +5,9 @@ import 'rc-slider/assets/index.css';
 import i18n from '../../utils/i18n';
 import { useTranslation } from 'react-i18next';
 
-const Aside = ({ toggleFilter, setToggleFilter, setToggleSearch, weights, categories }) => {
+const Aside = ({ toggle, setToggle, weights, categories }) => {
 
-    
+
 
     const lang = i18n.language;
     const { t } = useTranslation();
@@ -20,7 +20,7 @@ const Aside = ({ toggleFilter, setToggleFilter, setToggleSearch, weights, catego
         Number(searchParams.get('max_price')) || 100000
     ]);
     const [category, setCategory] = useState(searchParams.get('category') || '');
-    const [weight, setWeight] = useState( searchParams.getAll('weight')|| '');
+    const [weight, setWeight] = useState(searchParams.getAll('weight') || '');
 
     const [params, setParams] = useState(Object.fromEntries(searchParams.entries()))
 
@@ -96,11 +96,14 @@ const Aside = ({ toggleFilter, setToggleFilter, setToggleSearch, weights, catego
         return isExist;
     }
     return (
-        <aside className={`aside ${toggleFilter ? 'toggle' : ''}`}>
+        <aside className={`aside ${toggle.filter ? 'toggle' : ''}`}>
             <div className='aside_toggle'>
                 <button className="aside__toggle--btn" onClick={() => {
-                    setToggleFilter(!toggleFilter)
-                    setToggleSearch(false)
+                    setToggle({
+                        filter: !toggle.filter,
+                        search: false,
+                        sort: false
+                    })
                 }}>
                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <rect x="2.12134" width="24" height="3" rx="1" transform="rotate(45 2.12134 0)" fill="#231F20" />
