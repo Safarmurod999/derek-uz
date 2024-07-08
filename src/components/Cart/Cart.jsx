@@ -1,4 +1,4 @@
-import React, { useEffect} from 'react'
+import React, { useEffect } from 'react'
 
 import cartImage from '@/assets/images/product-mini.png';
 import { addData, calculateTotals, clearCart, decrementQuantity, incrementQuantity, removeItem, setCart, setName, setPhoneNumber, setQuanTity } from '../../store/cartSlice';
@@ -15,7 +15,7 @@ const Cart = ({ isModalOpen, setIsModalOpen }) => {
     const dispatch = useDispatch();
 
     const toggleModal = () => {
-        setIsModalOpen(!isModalOpen);
+        dispatch(setIsModalOpen(!isModalOpen))
         dispatch(setCart());
     };
 
@@ -25,8 +25,8 @@ const Cart = ({ isModalOpen, setIsModalOpen }) => {
 
     return (
         <div className={`cart ${isModalOpen ? 'open' : ''}`}>
-            <div className="cart__shadow" onClick={(e) => {
-                setIsModalOpen(false);
+            <div className="cart__shadow" onClick={() => {
+                dispatch(setIsModalOpen(false))
             }}>
 
             </div>
@@ -111,7 +111,7 @@ const Cart = ({ isModalOpen, setIsModalOpen }) => {
                             duration: 1500
                         })
                         dispatch(addData({ apiEndpoint: '/orders/', newData }))
-                        setIsModalOpen(false)
+                        dispatch(setIsModalOpen(false))
                     }}>
                         <div className='form__content'>
                             <input className='form__input' type="text" placeholder={t('name')} name='name' value={name} onChange={(e) => dispatch(setName(e.target.value))} required />

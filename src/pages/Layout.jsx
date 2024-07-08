@@ -1,11 +1,15 @@
 import { Footer, Header, Spinner } from '../components/index'
-import { Outlet } from 'react-router-dom'
+import { Outlet, useLocation } from 'react-router-dom'
 import { useFetch } from '../utils/utils';
 import { useEffect, useState } from 'react';
 import i18n from '../utils/i18n';
 import { useSelector } from 'react-redux';
 
 const Layout = () => {
+    const { pathname } = useLocation();
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [pathname]);
 
     const { cartLength } = useSelector((store) => store.cart);
     const [lang, setLang] = useState(JSON.parse(localStorage.getItem('lang')) || 'ru');

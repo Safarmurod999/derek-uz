@@ -5,11 +5,11 @@ import menu from "../../assets/icons/menu.svg"
 import close from "../../assets/icons/close.svg"
 import Dropdown from "../Dropdown/Dropdown"
 import Cart from "../Cart/Cart"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { handleDownload } from "../../utils/utils"
 
 import { useTranslation } from "react-i18next"
-import { setCart } from "../../store/cartSlice"
+import { setCart, setIsModalOpen } from "../../store/cartSlice"
 
 
 const Header = ({ catalog, lang, setLang, cartLength }) => {
@@ -56,7 +56,7 @@ const Header = ({ catalog, lang, setLang, cartLength }) => {
   const [openNavbar, setOpenNavbar] = useState(false)
   const [show, setShow] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+
 
   const controlNavbar = () => {
     setOpenNavbar(false);
@@ -80,9 +80,10 @@ const Header = ({ catalog, lang, setLang, cartLength }) => {
   }, [lastScrollY]);
 
   const dispatch = useDispatch();
+  const { isModalOpen } = useSelector((store) => store.cart);
   const toggleCart = () => {
     dispatch(setCart());
-    setIsModalOpen(!isModalOpen)
+    dispatch(setIsModalOpen(true))
   }
 
   return (

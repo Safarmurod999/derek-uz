@@ -9,6 +9,7 @@ const initialState = {
   cart: JSON.parse(localStorage.getItem("cartItems")) || [],
   total: 0,
   cartLength: JSON.parse(localStorage.getItem("cartItems"))?.length || 0,
+  isModalOpen: false,
 };
 
 export const addData = createAsyncThunk(
@@ -145,6 +146,12 @@ const cartSlice = createSlice({
         ...initialState,
         cartLength: payload.length
       }
+    },
+    setIsModalOpen: (initialState, { payload }) => {
+      return {
+        ...initialState,
+        isModalOpen: payload
+      }
     }
   },
   extraReducers: (builder) => {
@@ -177,7 +184,8 @@ export const {
   setCart,
   setName,
   setPhoneNumber,
-  getLength
+  getLength,
+  setIsModalOpen
 } = cartSlice.actions;
 
 export default cartSlice.reducer;

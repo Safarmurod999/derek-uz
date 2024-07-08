@@ -4,7 +4,7 @@ import i18n from '../../utils/i18n';
 import { useTranslation } from 'react-i18next';
 import Spinner from '../Spinner/Spinner';
 import { toast } from 'sonner';
-import { setCart } from '../../store/cartSlice';
+import { setCart, setIsModalOpen } from '../../store/cartSlice';
 import { useDispatch } from 'react-redux';
 const ProductModal = ({ item, closeModal }) => {
   const lang = i18n.language;
@@ -102,6 +102,7 @@ const ProductModal = ({ item, closeModal }) => {
                 closeModal();
                 toast.success('Product added to cart!', { duration: 1500 })
                 dispatch(setCart())
+                dispatch(setIsModalOpen(true));
               }}>{t('buy')}</button>
             </div>
             <p className="description">
