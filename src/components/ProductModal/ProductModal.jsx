@@ -3,10 +3,13 @@ import { addToCart, useFetch } from '../../utils/utils';
 import i18n from '../../utils/i18n';
 import { useTranslation } from 'react-i18next';
 import Spinner from '../Spinner/Spinner';
+import { toast } from 'sonner';
+import { setCart } from '../../store/cartSlice';
+import { useDispatch } from 'react-redux';
 const ProductModal = ({ item, closeModal }) => {
   const lang = i18n.language;
   const { t } = useTranslation();
-
+  const dispatch = useDispatch()
   const { data: product, loading, error } = useFetch(`/products-detail/${item.product}/`)
   const [quantity, setQuantity] = useState(1);
   const [weight, setWeight] = useState(0);
@@ -30,6 +33,7 @@ const ProductModal = ({ item, closeModal }) => {
       }
     }
   }
+
 
   if (loading) {
     return <Spinner position={'full'} />
@@ -95,6 +99,9 @@ const ProductModal = ({ item, closeModal }) => {
                   color: product.color[0].name || color,
                   category: product?.category || 0,
                 })
+                closeModal();
+                toast.success('Product added to cart!', { duration: 1500 })
+                dispatch(setCart())
               }}>{t('buy')}</button>
             </div>
             <p className="description">
