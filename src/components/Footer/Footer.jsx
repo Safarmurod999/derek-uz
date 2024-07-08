@@ -18,12 +18,12 @@ const Footer = () => {
       title: t('catalogs'),
       path: '/catalog',
       links: [
-        { id: 0, title: 'Creation W.G.' },
-        { id: 1, title: 'Shera' },
-        { id: 2, title: 'Candulor' },
-        { id: 3, title: 'Asiga' },
-        { id: 4, title: 'Hasbio' },
-        { id: 5, title: 'ZirkonZahn' },
+        { id: 0, title: 'Creation W.G.', path: '/#' },
+        { id: 1, title: 'Shera', path: '/#' },
+        { id: 2, title: 'Candulor', path: '/#' },
+        { id: 3, title: 'Asiga', path: '/#' },
+        { id: 4, title: 'Hasbio', path: '/#' },
+        { id: 5, title: 'ZirkonZahn', path: '/#' },
       ]
     },
     {
@@ -32,9 +32,9 @@ const Footer = () => {
       path: '/partners',
       links: [
         { id: 0, title: 'CC', path: '/company#history' },
-        { id: 1, title: 'ZI-F​' },
-        { id: 2, title: 'ZI-CT​' },
-        { id: 3, title: 'LS/LS Press​' },
+        { id: 1, title: 'ZI-F​', path: '/#' },
+        { id: 2, title: 'ZI-CT​', path: '/#' },
+        { id: 3, title: 'LS/LS Press​', path: '/#' },
       ]
     }
   ]
@@ -49,13 +49,13 @@ const Footer = () => {
         </div>
         <ul className="footer__list">
           {
-            dropArray.map((item,_index) => {
+            dropArray.map((item, _index) => {
               return (
                 <li key={_index} className="footer__list--item">
                   <a aria-label="footer" href={item.path}>{item.title}</a>
                   <ul className="footer__links">
                     {
-                      item.links.map((link,index) => {
+                      item.links.map((link, index) => {
                         return (
                           <li key={index}>
                             <a aria-label="footer-link" href={link.path}>{link.title}</a>

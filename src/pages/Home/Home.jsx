@@ -120,7 +120,7 @@ const Home = () => {
                   return (
                     <SwiperSlide key={index}>
                       <div className="home__image">
-                        <img src={item.image} alt="" />
+                        <img src={item.image} alt={item.title} loading="lazy"  />
                       </div>
                       <div className="home__main">
                         <div className="home__title">

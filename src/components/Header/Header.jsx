@@ -32,12 +32,12 @@ const Header = ({ catalog, lang, setLang, cartLength }) => {
       title: t('catalogs'),
       path: '/catalog',
       links: [
-        { id: 0, title: 'Creation W.G.' },
-        { id: 1, title: 'Shera' },
-        { id: 2, title: 'Candulor' },
-        { id: 3, title: 'Asiga' },
-        { id: 4, title: 'Hasbio' },
-        { id: 5, title: 'ZirkonZahn' },
+        { id: 0, title: 'Creation W.G.', path: '/#' },
+        { id: 1, title: 'Shera', path: '/#' },
+        { id: 2, title: 'Candulor', path: '/#' },
+        { id: 3, title: 'Asiga', path: '/#' },
+        { id: 4, title: 'Hasbio', path: '/#' },
+        { id: 5, title: 'ZirkonZahn', path: '/#' },
       ]
     },
     {
@@ -46,9 +46,9 @@ const Header = ({ catalog, lang, setLang, cartLength }) => {
       path: '/#brands',
       links: [
         { id: 0, title: 'CC', path: '/company#history' },
-        { id: 1, title: 'ZI-F​' },
-        { id: 2, title: 'ZI-CT​' },
-        { id: 3, title: 'LS/LS Press​' },
+        { id: 1, title: 'ZI-F​', path: '/#' },
+        { id: 2, title: 'ZI-CT​', path: '/#' },
+        { id: 3, title: 'LS/LS Press​', path: '/#' },
       ]
     }
   ]
