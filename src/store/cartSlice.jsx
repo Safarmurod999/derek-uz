@@ -136,10 +136,10 @@ const cartSlice = createSlice({
     },
     setPhoneNumber: (initialState, { payload }) => {
 
-      return {
-        ...initialState,
-        phone_number: payload
-      }
+        return {
+          ...initialState,
+          phone_number: payload
+        }
     },
     getLength: (initialState, { payload }) => {
       return {

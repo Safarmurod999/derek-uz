@@ -24,7 +24,7 @@ const ProductItem = ({ item, onClick }) => {
       weight: item.weight[0].value,
       category: item.category
     })
-    toast.success('Product added to cart', {
+    toast.success(t('order_accepted'), {
       duration: 1500
     })
     dispatch(setCart())

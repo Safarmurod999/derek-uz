@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'sonner';
 import i18n from '../../utils/i18n';
 import { useTranslation } from 'react-i18next';
+import { useMask } from '@react-input/mask';
 
 const Cart = ({ isModalOpen, setIsModalOpen }) => {
 
@@ -22,6 +23,34 @@ const Cart = ({ isModalOpen, setIsModalOpen }) => {
         dispatch(calculateTotals(cart));
     }, [cart]);
 
+    const handleInputChange = (e) => {
+
+        dispatch(setPhoneNumber(e.target.value))
+    };
+    const inputRef = useMask({ mask: '+998 (__) ___ __ __', replacement: { _: /\d/ } });
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        let newData = {
+            name,
+            phone_number,
+            cart
+        }
+        if (newData.cart.length > 0) {
+            console.log(newData.cart);
+            dispatch(addData({ apiEndpoint: '/orders/', newData }))
+            dispatch(setIsModalOpen(false))
+            toast.success(t('order_accepted'), {
+                duration: 1500
+            })
+        } else {
+            toast.error(t('cart_empty'),
+                {
+                    duration: 1500
+                }
+            );
+        }
+
+    }
     return (
         <div className={`cart ${isModalOpen ? 'open' : ''}`}>
             <div className="cart__shadow" onClick={() => {
@@ -99,22 +128,26 @@ const Cart = ({ isModalOpen, setIsModalOpen }) => {
                     <div className="cart__total">
                         {t('total')}  {total} $
                     </div>
-                    <form className='form' onSubmit={(e) => {
-                        e.preventDefault();
-                        let newData = {
-                            name,
-                            phone_number,
-                            cart
-                        }
-                        toast.success('Order accepted', {
-                            duration: 1500
-                        })
-                        dispatch(addData({ apiEndpoint: '/orders/', newData }))
-                        dispatch(setIsModalOpen(false))
-                    }}>
+                    <form className='form' onSubmit={handleSubmit}>
                         <div className='form__content'>
-                            <input className='form__input' type="text" placeholder={t('name')} name='name' value={name} onChange={(e) => dispatch(setName(e.target.value))} required />
-                            <input className='form__input' type="text" placeholder='+998 ' name='mobile' value={phone_number} onChange={(e) => dispatch(setPhoneNumber(e.target.value))} required />
+                            <input className='form__input'
+                                type="text"
+                                placeholder={t('name')}
+                                name='name'
+                                minLength={1}
+                                maxLength={35}
+                                value={name}
+                                onChange={(e) => dispatch(setName(e.target.value))}
+                                required />
+                            <input className='form__input v-mask'
+                                type="text"
+                                placeholder='+998 '
+                                name='mobile'
+                                value={phone_number}
+                                onChange={(e) => handleInputChange(e)}
+                                ref={inputRef}
+                                required />
+
                         </div>
 
                         <button type="submit" >{t('order')}</button>

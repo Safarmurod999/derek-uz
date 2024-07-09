@@ -100,7 +100,9 @@ const ProductModal = ({ item, closeModal }) => {
                   category: product?.category || 0,
                 })
                 closeModal();
-                toast.success('Product added to cart!', { duration: 1500 })
+                toast.success(t('product_added'), {
+                  duration: 1500
+                })
                 dispatch(setCart())
                 dispatch(setIsModalOpen(true));
               }}>{t('buy')}</button>
