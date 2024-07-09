@@ -30,7 +30,6 @@ const Catalog = () => {
         dispatch({ type: 'ON_TERM', payload: term })
     }
 
-    const [toggleFilter, setToggleFilter] = useState(false);
     const [toggle, setToggle] = useState({
         filter: false,
         search: false,
