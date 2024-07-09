@@ -36,7 +36,6 @@ const Cart = ({ isModalOpen, setIsModalOpen }) => {
             cart
         }
         if (newData.cart.length > 0) {
-            console.log(newData.cart);
             dispatch(addData({ apiEndpoint: '/orders/', newData }))
             dispatch(setIsModalOpen(false))
             toast.success(t('order_accepted'), {
