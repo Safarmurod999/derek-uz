@@ -67,8 +67,6 @@ const Catalog = () => {
     }, []);
     const fetchData = async () => {
         try {
-            setIsLoading(true);
-            await new Promise((resolve) => setTimeout(resolve, 3000));
             const response = await fetch(`${BASE_URL}/products-list${queryString.length ? '/' + queryString : '/?'}${queryString.length ? `&limit=${limit}&offset=${offset}` : `limit=${limit}&offset=${offset}`}`);
 
             const data = await response.json();
@@ -80,6 +78,7 @@ const Catalog = () => {
         }
     };
     useEffect(() => {
+        setIsLoading(true);
         if (debounceTimer) {
             clearTimeout(debounceTimer);
         }
