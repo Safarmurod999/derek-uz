@@ -1,12 +1,25 @@
-import { teamArray } from "../../data/const"
-import company_img from "../../assets/images/company_img.png"
-import { Cart, Title } from "../../components"
-import { useState } from "react";
+
+import { Spinner, Title } from "../../components"
+
 import { useTranslation } from "react-i18next";
+import { useFetch } from "../../utils/utils";
+
+import company_img from "../../assets/images/company_img.png"
+import vector from "../../assets/images/vector.svg";
+
 
 const Company = () => {
     const { t } = useTranslation();
+    const { data: team, loading, error } = useFetch('/team-list');
+
+    if (loading) {
+        return <Spinner position={'full'} />
+    }
+    if (error) {
+        console.log(error);
+    }
     return (
+        !loading &&
         <main className="company">
 
             {/* Hero section */}
@@ -46,13 +59,14 @@ const Company = () => {
                 <div className="container">
                     <Title>{t('our_team')}</Title>
                     <div className='team__list'>
-                        {teamArray.map((item) => (
+                        {team.map((item) => (
                             <div key={item.id} className='team__list--item'>
-                                <img src={item.image} alt={item.title} width='250' className="team__list--image" />
+                                <img src={item.image} alt={item.name} width='250' className="team__list--image" />
                                 <div className='team__list--item__date'>
                                     <h5>{item.name}</h5>
                                     <p>{item.position}</p>
                                 </div>
+                                <img src={vector} alt="vector" className="bg-img" />
                             </div>
                         ))}
                     </div>
