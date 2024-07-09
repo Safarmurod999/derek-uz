@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next";
 import { useFetch } from "../../utils/utils";
 
 import company_img from "../../assets/images/company_img.png"
-import vector from "../../assets/images/vector.svg";
+import vector from "../../assets/images/vector.png";
 
 
 const Company = () => {

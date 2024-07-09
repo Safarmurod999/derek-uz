@@ -207,6 +207,8 @@
   }
 }
 .shrink {
+  width: 95% !important;
+  margin-top: -10px !important;
   transition: 0.3s;
   background-color: var(--white);
   border-radius: 15px;
