@@ -99,7 +99,6 @@ const Catalog = () => {
     }, [windowWidth, items]);
 
 
-
     if (loading) return <Spinner position="relative" />;
     if (error) return <div>Error: {error.message}</div>;
 
