@@ -18,7 +18,7 @@ export const addData = createAsyncThunk(
     try {
       let data = newData.cart.map(el => {
         return {
-          product: el.id,
+          product: el.product,
           quantity: el.quantity,
           weight: el.weight,
           color: el.color

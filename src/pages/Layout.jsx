@@ -11,6 +11,9 @@ const Layout = () => {
         window.scrollTo(0, 0);
     }, [pathname]);
 
+    const { data: catalog, loading, error } = useFetch('/catalog-list');
+
+
     const { cartLength } = useSelector((store) => store.cart);
     const [lang, setLang] = useState(JSON.parse(localStorage.getItem('lang')) || 'ru');
 
@@ -18,7 +21,12 @@ const Layout = () => {
         i18n.changeLanguage(lang);
     }, [lang]);
 
-    const { data: catalog, loading, error } = useFetch('/catalog-list');
+
+    const handleLang = (lang) => {
+        setLang(lang);
+        localStorage.setItem('lang', JSON.stringify(lang));
+        i18n.changeLanguage(lang);
+    }
 
     if (loading) {
         return <Spinner position={"full"} />
@@ -26,12 +34,6 @@ const Layout = () => {
     if (error) {
         console.log(error);
     }
-    const handleLang = (lang) => {
-        setLang(lang);
-        localStorage.setItem('lang', JSON.stringify(lang));
-        i18n.changeLanguage(lang);
-    }
-
     return (
         <>
             <Header catalog={catalog} lang={lang} setLang={handleLang} cartLength={cartLength} />

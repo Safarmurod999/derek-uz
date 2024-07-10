@@ -12,8 +12,8 @@ const ProductModal = ({ item, closeModal }) => {
   const dispatch = useDispatch()
   const { data: product, loading, error } = useFetch(`/products-detail/${item.product}/`)
   const [quantity, setQuantity] = useState(1);
-  const [weight, setWeight] = useState(0);
-  const [color, setColor] = useState(0);
+  const [weight, setWeight] = useState(null);
+  const [color, setColor] = useState(null);
 
   const handleQuantityChange = (e) => {
     if (quantity > 0) {
@@ -24,16 +24,22 @@ const ProductModal = ({ item, closeModal }) => {
   };
   const handleChangeBtn = (action) => {
     if (action == "+") {
-      setQuantity(quantity + 1);
+      
+      setQuantity(quantity => quantity + 1);
+      
     } else {
       if (quantity > 0) {
-        setQuantity(quantity - 1);
+        
+        setQuantity(quantity => quantity - 1);
+        
       } else {
         setQuantity(0);
       }
     }
   }
-
+  const handleChangeWeight = (e) => {
+    setWeight(e.target.value)
+  }
 
   if (loading) {
     return <Spinner position={'full'} />
@@ -73,7 +79,7 @@ const ProductModal = ({ item, closeModal }) => {
             </div>
             <div className="weight-options">
               <label>{t('weight')}</label>
-              <select onChange={(e) => setWeight(e.target.value)}>
+              <select onChange={handleChangeWeight}>
                 {
                   product.weight.map((item, index) => {
                     return <option key={index} value={item.value}>{item.value} {lang == 'ru' ? 'г' : 'g'}</option>
@@ -90,13 +96,18 @@ const ProductModal = ({ item, closeModal }) => {
               </div>
               <button aria-label='buy-btn' className="buy-button" onClick={() => {
                 addToCart({
+                  product: product.id,
                   title: product?.title || '',
+                  title_ru: product?.title_ru || '',
+                  title_en: product?.title_en || '',
                   image: product?.image || '',
                   price: product?.price || 0,
                   quantity: quantity,
                   content: product?.content || '',
-                  weight: product.weight[0].value || weight,
-                  color: product.color[0].name || color,
+                  content_ru: product?.content_ru || '',
+                  content_en: product?.content_en || '',
+                  weight: weight ?? product.weight[0].value,
+                  color: color ?? product.color[0].name,
                   category: product?.category || 0,
                 })
                 closeModal();

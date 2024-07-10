@@ -1,5 +1,4 @@
 import { BrowserRouter } from 'react-router-dom'
-import './App.scss'
 import Router from './router/routes'
 import { Toaster, toast} from 'sonner'
 

@@ -1,5 +1,3 @@
-// import i18n from "./i18n";
-
 const searchHandler = (arr, term) => {
   const lang = JSON.parse(localStorage.getItem("lang"));
   if (term === 0) {

@@ -31,37 +31,57 @@ const useFetchMultipleAPIs = (urls) => {
 export default useFetchMultipleAPIs;
 
 export function addToCart({
-  image,
-  price,
+  product,
   title,
   title_ru,
   title_en,
+  image,
+  price,
+  quantity,
   content,
   content_ru,
   content_en,
-  color,
   weight,
+  color,
   category,
-  quantity,
 }) {
+  console.log(quantity);
+  console.log(weight);
   let cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
-  let item = {
-    id: cartItems.at(-1)?.id + 1 || 1,
-    title: title,
-    title_ru: title_ru,
-    title_en: title_en,
-    content: content,
-    content_ru: content_ru,
-    content_en: content_en,
-    image: image,
-    price: price,
-    quantity: quantity || 1,
-    weight: weight || 10,
-    color: color || "A1",
-    category: category || 0,
-  };
-
-  cartItems.push(item);
+  if (
+    cartItems.filter((el) => el.product == product).length &&
+    cartItems.filter((el) => el.color == color).length &&
+    cartItems.filter((el) => el.weight == weight).length
+  ) {
+    cartItems = cartItems.map((el) => {
+      if (el.product == product && el.color == color && el.weight == weight) {
+        return {
+          ...el,
+          quantity: el.quantity + quantity,
+        };
+      } else {
+        return el;
+      }
+    });
+  } else {
+    let item = {
+      id: cartItems.at(-1)?.id + 1 || 1,
+      title: title,
+      title_ru: title_ru,
+      title_en: title_en,
+      content: content,
+      content_ru: content_ru,
+      content_en: content_en,
+      image: image,
+      price: price,
+      quantity: quantity,
+      weight: weight,
+      color: color,
+      category: category,
+      product: product,
+    };
+    cartItems.push(item);
+  }
   localStorage.setItem("cartItems", JSON.stringify(cartItems));
 }
 
