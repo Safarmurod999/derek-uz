@@ -45,8 +45,6 @@ export function addToCart({
   color,
   category,
 }) {
-  console.log(quantity);
-  console.log(weight);
   let cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
   if (
     cartItems.filter((el) => el.product == product).length &&
