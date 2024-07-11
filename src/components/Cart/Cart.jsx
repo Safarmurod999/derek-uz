@@ -104,7 +104,7 @@ const Cart = ({ isModalOpen, setIsModalOpen }) => {
                                     <ul className="cart__details">
                                         <li className="cart__details--item">
                                             <p>{t('articles')}</p>
-                                            <div>SKU001-1</div>
+                                            <div>{item?.artikul}</div>
                                         </li>
                                         <li className="cart__details--item">
                                             <p>{t('color')}</p>

@@ -5,9 +5,13 @@ const searchHandler = (arr, term) => {
   }
   return arr.filter((item) => {
     if (lang == "ru") {
-      return item.title.toLowerCase().indexOf(term.toLowerCase()) > -1;
+      return item.title
+        ? item.title.toLowerCase().indexOf(term.toLowerCase()) > -1
+        : item.title;
     } else {
-      return item.title_en.toLowerCase().indexOf(term.toLowerCase()) > -1;
+      return item.title_en
+        ? item.title_en.toLowerCase().indexOf(term.toLowerCase()) > -1
+        : item.title;
     }
   });
 };
@@ -44,7 +48,6 @@ const filterHandler = (arr, filter) => {
         return a.price - b.price;
       });
     case "descending_price":
-        
       return arr.sort((a, b) => {
         return b.price - a.price;
       });

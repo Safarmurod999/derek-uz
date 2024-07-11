@@ -26,14 +26,7 @@ const Home = () => {
   const { t } = useTranslation();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [item, setItem] = useState({
-    title: '',
-    image: '',
-    price: 0,
-    quantity: 1,
-    content: '',
-    weight: ["10g"],
-    color: "A1",
-    category: 0,
+    product: 0
   });
 
   const openModal = (item) => {
@@ -120,7 +113,7 @@ const Home = () => {
                   return (
                     <SwiperSlide key={index}>
                       <div className="home__image">
-                        <img src={item.image} alt={item.title} loading="lazy"  />
+                        <img src={item.image} alt={item.title} loading="lazy" />
                       </div>
                       <div className="home__main">
                         <div className="home__title">

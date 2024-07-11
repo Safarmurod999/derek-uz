@@ -58,8 +58,8 @@ const Catalog = () => {
         '/products-weight',
     ];
 
+    ;
     const { data, loading, error } = useFetchMultipleAPIs(urls);
-
     useEffect(() => {
         const handleResize = () => setWindowWidth(window.innerWidth);
         window.addEventListener('resize', handleResize);
@@ -94,7 +94,7 @@ const Catalog = () => {
     }, [limit, offset, queryString]);
 
     useEffect(() => {
-        const numItems = windowWidth > 768 ? 6 : 4;
+        const numItems = windowWidth > 768 ? 8 : 6;
         setLimit(numItems);
     }, [windowWidth, items]);
 
@@ -103,7 +103,7 @@ const Catalog = () => {
     if (error) return <div>Error: {error.message}</div>;
 
     if (items && data) {
-        var productsArray = items?.results;
+        var productsArray = items.results;
         var categories = data[1];
         var colors = data[2];
         var weights = data[3];
@@ -127,18 +127,25 @@ const Catalog = () => {
                 return {
                     ...product,
                     category: category ? category.name : "No category",
+                    title: product?.title ?? '',
+                    title_en: product?.title_en ?? '',
+                    title_ru: product?.title_ru ?? '',
+                    content: product?.content ?? '',
+                    content_en: product?.content_en ?? '',
+                    content_ru: product?.content_ru ?? '',
                     color: getColors(product.color),
                     weight: getWeights(product.weight),
                 }
             });
+            console.log(productsArray);
         }
     }
+
 
     const paginate = (pageNumber) => {
         setOffset((pageNumber - 1) * limit);
         setCurrentPage(pageNumber);
     };
-
     const filterArray = filterHandler(searchHandler(state.data, state.term), state.filter);
     return (
         <>
@@ -223,6 +230,7 @@ const Catalog = () => {
                                             filterArray.map((product) => {
 
                                                 product = productsArray.find(item => item.id == product.id);
+
                                                 return (
                                                     <ProductItem key={product.id} item={product} onClick={openModal} />
                                                 )

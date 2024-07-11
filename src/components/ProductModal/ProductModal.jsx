@@ -24,14 +24,14 @@ const ProductModal = ({ item, closeModal }) => {
   };
   const handleChangeBtn = (action) => {
     if (action == "+") {
-      
+
       setQuantity(quantity => quantity + 1);
-      
+
     } else {
       if (quantity > 0) {
-        
+
         setQuantity(quantity => quantity - 1);
-        
+
       } else {
         setQuantity(0);
       }
@@ -59,7 +59,7 @@ const ProductModal = ({ item, closeModal }) => {
           <div className="product-details">
             <h2>{lang == 'ru' ? product.title : item[`title_${lang}`]}</h2>
             <p>
-              {t('articles')}: {product.category}
+              {t('articles')}: {product.artikul}
             </p>
             <span className="price">$ {product.price}</span>
             <div className="color-options">
@@ -106,9 +106,10 @@ const ProductModal = ({ item, closeModal }) => {
                   content: product?.content || '',
                   content_ru: product?.content_ru || '',
                   content_en: product?.content_en || '',
-                  weight: weight ?? product.weight[0].value,
-                  color: color ?? product.color[0].name,
+                  weight: weight ?? product?.weight[0]?.value ?? 0,
+                  color: color ?? product?.color[0]?.name ?? '',
                   category: product?.category || 0,
+                  artikul: product?.artikul || ''
                 })
                 closeModal();
                 toast.success(t('product_added'), {

@@ -17,7 +17,7 @@ const Aside = ({ toggle, setToggle, weights, categories }) => {
 
     const [priceRange, setPriceRange] = useState([
         Number(searchParams.get('min_price')) || 0,
-        Number(searchParams.get('max_price')) || 100000
+        Number(searchParams.get('max_price')) || 10000
     ]);
     const [category, setCategory] = useState(searchParams.get('category') || '');
     const [weight, setWeight] = useState(searchParams.getAll('weight') || '');
@@ -46,8 +46,17 @@ const Aside = ({ toggle, setToggle, weights, categories }) => {
     }
     const handlePriceChange = (value) => {
         setPriceRange(value);
-        params.min_price = value[0];
-        params.max_price = value[1];
+        if (value[0] > 0) {
+            params.min_price = value[0];
+
+        } else {
+            params.min_price = 0;
+        }
+        if (value[1] <= 10000) {
+            params.max_price = value[1];
+        } else {
+            params.max_price = 10000;
+        }
         if (searchParams.get('category')) {
             params.category = category
         }
@@ -114,7 +123,7 @@ const Aside = ({ toggle, setToggle, weights, categories }) => {
             <ul className='aside__list'>
                 <li className='aside__list--item'>
                     <p>{t('filter_1')}</p>
-                    <ul>
+                    <ul className='aside__categories'>
                         {
                             categories.map((_category) => (
                                 <li key={_category.id} onClick={() => handleCategory(_category.id)}>
@@ -131,7 +140,7 @@ const Aside = ({ toggle, setToggle, weights, categories }) => {
                             <Slider
                                 range
                                 min={0}
-                                max={100000}
+                                max={10000}
                                 value={priceRange}
                                 onChange={handlePriceChange}
                             />
@@ -140,15 +149,11 @@ const Aside = ({ toggle, setToggle, weights, categories }) => {
                             <input
                                 type="number"
                                 value={priceRange[0]}
-                                min={0}
-                                max={100000}
                                 onChange={(e) => handlePriceChange([+e.target.value, priceRange[1]])}
                             />
                             <input
                                 type="number"
                                 value={priceRange[1]}
-                                min={0}
-                                max={100000}
                                 onChange={(e) => handlePriceChange([priceRange[0], +e.target.value])}
                             />
                         </div>
@@ -174,7 +179,7 @@ const Aside = ({ toggle, setToggle, weights, categories }) => {
                     <button aria-label='navigate-btn' onClick={() => {
                         setCategory('')
                         setWeight('')
-                        setPriceRange([0, 100000])
+                        setPriceRange([0, 10000])
                         setParams({})
                         navigate('/catalog')
                     }}>

@@ -1,6 +1,7 @@
 .catalog {
   @include between(25px);
   margin-top: 101px;
+  overflow: hidden;
   .container {
     @include between(25px);
     align-items: flex-start;

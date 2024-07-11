@@ -9,7 +9,7 @@
     }
   }
   .swiper {
-    height: 356px;
+    height: 376px;
   }
   .swiper-wrapper {
     align-items: stretch;
@@ -26,6 +26,8 @@
   flex-direction: column;
   &-image {
     padding: 22px;
+    min-height: 165px;
+    max-height: 165px;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     background-color: #f8f5fa;
@@ -33,10 +35,12 @@
     @media screen and (max-width: 470px) {
       border-top-left-radius: 6.5px;
       border-top-right-radius: 6.5px;
+      min-height: 107px;
     }
     @include center;
     img {
       max-width: 96px;
+      height: 100%;
     }
   }
   &-content {

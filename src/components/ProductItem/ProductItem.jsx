@@ -20,10 +20,11 @@ const ProductItem = ({ item, onClick }) => {
       content_en: item.content_en,
       image: item.image,
       price: item.price,
-      color: item.color[0].name,
-      weight: item.weight[0].value,
+      color: item?.color[0]?.name || '',
+      weight: item?.weight[0]?.value ? item?.weight[0]?.value : 0,
       category: item.category,
-      quantity: 1
+      quantity: 1,
+      artikul: item.artikul
     })
     toast.success(t('order_accepted'), {
       duration: 1500

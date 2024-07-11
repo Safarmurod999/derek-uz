@@ -9,10 +9,10 @@ import i18n from './utils/i18n.js'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-      <Provider store={store}>
-        <CatalogProvider>
-          <App />
-        </CatalogProvider>
-      </Provider>
+    <Provider store={store}>
+      <CatalogProvider>
+        <App />
+      </CatalogProvider>
+    </Provider>
   </React.StrictMode>
 )
