@@ -67,6 +67,7 @@ i18n.use(initReactI18next).init({
         order_accepted: "Order accepted!",
         cart_empty: "Cart is empty!",
         product_added: "Product added to cart!",
+        is_over:'Not available'
       },
     },
     ru: {
@@ -134,6 +135,7 @@ i18n.use(initReactI18next).init({
         order_accepted: "Заказ принят!",
         cart_empty: "Корзина пуста!",
         product_added: "Товар добавлен в корзину!",
+        is_over:'Нет в наличии'
       },
     },
   },

@@ -60,7 +60,7 @@ const cartSlice = createSlice({
     },
     incrementQuantity: (initialState, { payload }) => {
       let tempCart = initialState.cart.map((cartItem) => {
-        if (cartItem.id === payload) {
+        if (cartItem.id === payload && cartItem.stock > cartItem.quantity) {
 
           return {
             ...cartItem,
@@ -136,10 +136,10 @@ const cartSlice = createSlice({
     },
     setPhoneNumber: (initialState, { payload }) => {
 
-        return {
-          ...initialState,
-          phone_number: payload
-        }
+      return {
+        ...initialState,
+        phone_number: payload
+      }
     },
     getLength: (initialState, { payload }) => {
       return {

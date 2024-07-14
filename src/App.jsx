@@ -6,7 +6,11 @@ import './App.scss'
 function App() {
   return (
     <BrowserRouter>
-      <Toaster position='top-right' />
+      <Toaster position='top-right'  richColors toastOptions={{
+        style:{
+          padding:'10px 20px',
+        }
+      }}/>
       <Router />
     </BrowserRouter>
   )

@@ -5,27 +5,26 @@ import { useTranslation } from 'react-i18next';
 import Spinner from '../Spinner/Spinner';
 import { toast } from 'sonner';
 import { setCart, setIsModalOpen } from '../../store/cartSlice';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 const ProductModal = ({ item, closeModal }) => {
   const lang = i18n.language;
   const { t } = useTranslation();
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
+  const {cart} = useSelector((store)=>store.cart);
   const { data: product, loading, error } = useFetch(`/products-detail/${item.product}/`)
   const [quantity, setQuantity] = useState(1);
   const [weight, setWeight] = useState(null);
   const [color, setColor] = useState(null);
 
   const handleQuantityChange = (e) => {
-    if (quantity > 0) {
       setQuantity(e.target.value);
-    } else {
-      setQuantity(0);
-    }
   };
   const handleChangeBtn = (action) => {
     if (action == "+") {
 
-      setQuantity(quantity => quantity + 1);
+      if (product.stock > quantity) {
+        setQuantity(quantity => quantity + 1);
+      }
 
     } else {
       if (quantity > 0) {
@@ -90,9 +89,9 @@ const ProductModal = ({ item, closeModal }) => {
             </div>
             <div className="quantity-wrapper">
               <div className="quantity-control">
-                <button aria-label='minus-btn' onClick={() => handleChangeBtn("-")}>-</button>
-                <input type="number" min={0} value={quantity} onChange={handleQuantityChange} />
-                <button aria-label='plus-btn' onClick={() => handleChangeBtn("+")}>+</button>
+                <button aria-label='minus-btn' disabled={product.stock <= 0} onClick={() => handleChangeBtn("-")}>-</button>
+                <input type="number" min={0} disabled={product.stock <= 0} value={quantity} onChange={handleQuantityChange} />
+                <button aria-label='plus-btn' disabled={product.stock <= 0} onClick={() => handleChangeBtn("+")}>+</button>
               </div>
               <button aria-label='buy-btn' className="buy-button" onClick={() => {
                 addToCart({
@@ -109,7 +108,8 @@ const ProductModal = ({ item, closeModal }) => {
                   weight: weight ?? product?.weight[0]?.value ?? 0,
                   color: color ?? product?.color[0]?.name ?? '',
                   category: product?.category || 0,
-                  artikul: product?.artikul || ''
+                  artikul: product?.artikul || '',
+                  stock: product?.stock || 0
                 })
                 closeModal();
                 toast.success(t('product_added'), {
@@ -117,7 +117,7 @@ const ProductModal = ({ item, closeModal }) => {
                 })
                 dispatch(setCart())
                 dispatch(setIsModalOpen(true));
-              }}>{t('buy')}</button>
+              }} disabled={product.stock <= 0 || cart.find(item=>item.product==product.id)?.stock==1}>{t('buy')}</button>
             </div>
             <p className="description">
               {lang == 'ru' ? product.content : item[`content_${lang}`]}

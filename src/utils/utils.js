@@ -44,7 +44,8 @@ export function addToCart({
   weight,
   color,
   category,
-  artikul
+  artikul,
+  stock
 }) {
   let cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
   if (
@@ -79,6 +80,7 @@ export function addToCart({
       category: category,
       product: product,
       artikul: artikul,
+      stock: stock,
     };
     cartItems.push(item);
   }

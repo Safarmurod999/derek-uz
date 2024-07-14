@@ -137,7 +137,6 @@ const Catalog = () => {
                     weight: getWeights(product.weight),
                 }
             });
-            console.log(productsArray);
         }
     }
 

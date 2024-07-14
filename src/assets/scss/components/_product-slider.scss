@@ -36,6 +36,7 @@
       border-top-left-radius: 6.5px;
       border-top-right-radius: 6.5px;
       min-height: 107px;
+      max-height: 107px;
     }
     @include center;
     img {
@@ -84,11 +85,28 @@
       margin-bottom: 10px;
     }
   }
+  &-stock{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
   &-price {
     margin-top: auto;
     font-size: 12px;
     font-weight: 700;
     color: #000;
+    margin-bottom: 18px;
+    @media screen and (max-width: 470px) {
+      font-size: 9px;
+      margin-bottom: 11px;
+    }
+  }
+  &-over{
+    margin-top: auto;
+    font-size: 12px;
+    font-weight: 700;
+    color: #f00;
     margin-bottom: 18px;
     @media screen and (max-width: 470px) {
       font-size: 9px;

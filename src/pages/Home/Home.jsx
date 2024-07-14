@@ -47,6 +47,7 @@ const Home = () => {
     '/categories',
     '/products-color',
     '/products-weight',
+    '/bestseller-list'
   ];
 
   const { data, loading, error } = useFetchMultipleAPIs(urls);
