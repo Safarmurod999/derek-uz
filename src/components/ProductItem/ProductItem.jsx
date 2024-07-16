@@ -37,7 +37,9 @@ const ProductItem = ({ item, onClick }) => {
   return (
     <div className='product__slider--item card'>
       <div className="card-image">
-        <img src={item.image} alt="image" />
+        {
+          item.image ? <img src={item.image} alt="image" /> : <div className="card-no-image">{t('no_image')}</div>
+        }
       </div>
       <div className="card-content">
         <h3 className="card-title">{lang == 'ru' ? item.title : item[`title_${lang}`]}</h3>

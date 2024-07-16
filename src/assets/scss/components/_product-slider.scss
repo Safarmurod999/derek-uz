@@ -10,6 +10,9 @@
   }
   .swiper {
     height: 376px;
+    @media screen and (max-width: 476px) {
+      height: 268px;
+    }
   }
   .swiper-wrapper {
     align-items: stretch;
@@ -32,17 +35,20 @@
     border-top-right-radius: 10px;
     background-color: #f8f5fa;
 
+    @include center;
     @media screen and (max-width: 470px) {
       border-top-left-radius: 6.5px;
       border-top-right-radius: 6.5px;
       min-height: 107px;
       max-height: 107px;
     }
-    @include center;
     img {
       max-width: 96px;
       height: 100%;
     }
+  }
+  &-no-image {
+    text-align: center;
   }
   &-content {
     width: 100%;
@@ -85,7 +91,7 @@
       margin-bottom: 10px;
     }
   }
-  &-stock{
+  &-stock {
     width: 100%;
     display: flex;
     align-items: center;
@@ -102,7 +108,7 @@
       margin-bottom: 11px;
     }
   }
-  &-over{
+  &-over {
     margin-top: auto;
     font-size: 12px;
     font-weight: 700;
