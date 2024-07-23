@@ -18,15 +18,6 @@ const Pagination = ({ itemsPerPage, totalItems, offset, setOffset }) => {
     }
     return (
         <div className='pagination'>
-            {/* <ul className="pagination-wrapper">
-                {pageNumbers.map((number) => (
-                    <li key={number} className={`page-item ${currentPage === number ? 'active' : ''}`}>
-                        <button aria-label='page-btn' onClick={() => paginate(number)} className="page-link">
-                            {number}
-                        </button>
-                    </li>
-                ))}
-            </ul> */}
             <ReactPaginate
                 className="pagination-wrapper"
                 breakLabel="..."

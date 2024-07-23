@@ -190,7 +190,6 @@ const Aside = ({ toggle, setToggle, weights, categories }) => {
                     </button>
                 </li>
             </ul>
-
         </aside>
     );
 };
