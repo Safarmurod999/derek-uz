@@ -10,14 +10,14 @@ const ProductModal = ({ item, closeModal }) => {
   const lang = i18n.language;
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  const {cart} = useSelector((store)=>store.cart);
+  const { cart } = useSelector((store) => store.cart);
   const { data: product, loading, error } = useFetch(`/products-detail/${item.product}/`)
   const [quantity, setQuantity] = useState(1);
   const [weight, setWeight] = useState(null);
   const [color, setColor] = useState(null);
 
   const handleQuantityChange = (e) => {
-      setQuantity(e.target.value);
+    setQuantity(e.target.value);
   };
   const handleChangeBtn = (action) => {
     if (action == "+") {
@@ -27,12 +27,12 @@ const ProductModal = ({ item, closeModal }) => {
       }
 
     } else {
-      if (quantity > 0) {
+      if (quantity > 1) {
 
         setQuantity(quantity => quantity - 1);
 
       } else {
-        setQuantity(0);
+        setQuantity(1);
       }
     }
   }
@@ -62,30 +62,40 @@ const ProductModal = ({ item, closeModal }) => {
             </p>
             <span className="price">$ {product.price}</span>
             <div className="color-options">
-              <label>{t('color')}</label>
-              <div className="color-buttons">
-                {
-                  product.color.map((item, index) => {
-                    return <button aria-label='color-btn' key={index}
-                      onClick={() => setColor(item.name)}
-                      className={color == item.name ? 'active' : ''}
-                    >
-                      {item.name}
-                    </button>
-                  })
-                }
-              </div>
+              {
+                product?.color.length > 0 && (<>
+                  <label>{t('color')}</label>
+                  <div className="color-buttons">
+                    {
+                      product.color.map((item, index) => {
+                        return <button aria-label='color-btn' key={index}
+                          onClick={() => setColor(item.name)}
+                          className={color == item.name ? 'active' : ''}
+                        >
+                          {item.name}
+                        </button>
+                      })
+                    }
+                  </div>
+                </>)
+              }
             </div>
             <div className="weight-options">
-              <label>{t('weight')}</label>
-              <select onChange={handleChangeWeight}>
-                {
-                  product.weight.map((item, index) => {
-                    return <option key={index} value={item.value}>{item.value} {lang == 'ru' ? 'г' : 'g'}</option>
-                  }
-                  )
-                }
-              </select>
+              {
+                product?.weight.length > 0 && (
+                  <>
+                    <label>{t('weight')}</label>
+                    <select onChange={handleChangeWeight}>
+                      {
+                        product.weight.map((item, index) => {
+                          return <option key={index} value={item.value}>{item.value} {lang == 'ru' ? 'г' : 'g'}</option>
+                        }
+                        )
+                      }
+                    </select>
+                  </>
+                )
+              }
             </div>
             <div className="quantity-wrapper">
               <div className="quantity-control">
@@ -117,7 +127,7 @@ const ProductModal = ({ item, closeModal }) => {
                 })
                 dispatch(setCart())
                 dispatch(setIsModalOpen(true));
-              }} disabled={product.stock <= 0 || cart.find(item=>item.product==product.id)?.stock==1}>{t('buy')}</button>
+              }} disabled={product.stock <= 0 || cart.find(item => item.product == product.id)?.stock == 1}>{t('buy')}</button>
             </div>
             <p className="description">
               {lang == 'ru' ? product.content : item[`content_${lang}`]}

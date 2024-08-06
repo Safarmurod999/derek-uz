@@ -22,11 +22,13 @@ const filterHandler = (arr, filter) => {
     case "ascending":
       return arr.sort((a, b) => {
         if (lang == "ru") {
-          return a.title_ru.localeCompare(b.title_ru, "ru", {
+          const isRussian = /^[А-Яа-я]+$/.test(a.title_ru);
+          return a.title_ru.localeCompare(b.title_ru, isRussian ? "ru" : "en", {
             sensitivity: "base",
           });
         } else {
-          return a.title_en.localeCompare(b.title_en, "en", {
+          const isEnglish = /^[A-Za-z]+$/.test(a.title_en);
+          return a.title_en.localeCompare(b.title_en, isEnglish ? "en" : "ru", {
             sensitivity: "base",
           });
         }

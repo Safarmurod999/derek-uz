@@ -11,7 +11,6 @@ import { handleDownload } from "../../utils/utils"
 import { useTranslation } from "react-i18next"
 import { setCart, setIsModalOpen } from "../../store/cartSlice"
 
-
 const Header = ({ catalog, lang, setLang, cartLength }) => {
 
   const { t } = useTranslation();
@@ -23,8 +22,7 @@ const Header = ({ catalog, lang, setLang, cartLength }) => {
       path: '/company',
       links: [
         { id: 0, title: t('header_3'), path: '/company#history' },
-        { id: 1, title: t('header_4'), path: '/company#team' },
-        { id: 2, title: t('header_5'), path: '/company#contact' }
+        { id: 1, title: t('header_5'), path: '/company#contact' }
       ]
     },
     {
@@ -32,12 +30,12 @@ const Header = ({ catalog, lang, setLang, cartLength }) => {
       title: t('catalogs'),
       path: '/catalog',
       links: [
-        { id: 0, title: 'Creation W.G.', path: '/#' },
-        { id: 1, title: 'Shera', path: '/#' },
-        { id: 2, title: 'Candulor', path: '/#' },
-        { id: 3, title: 'Asiga', path: '/#' },
-        { id: 4, title: 'Hasbio', path: '/#' },
-        { id: 5, title: 'ZirkonZahn', path: '/#' },
+        { id: 0, title: 'Creation W.G.', path: '/catalog?category=22' },
+        { id: 1, title: 'Shera', path: '/catalog?category=39' },
+        { id: 2, title: 'Candulor', path: '/catalog?category=25' },
+        { id: 3, title: 'Asiga', path: '/catalog?category=12' },
+        { id: 4, title: 'Hasbio', path: '/catalog?category=4' },
+        { id: 5, title: 'ZirkonZahn', path: '/catalog?category=2' },
       ]
     },
     {
@@ -45,10 +43,10 @@ const Header = ({ catalog, lang, setLang, cartLength }) => {
       title: t('header_2'),
       path: '/#brands',
       links: [
-        { id: 0, title: 'CC', path: '/company#history' },
-        { id: 1, title: 'ZI-F​', path: '/#' },
-        { id: 2, title: 'ZI-CT​', path: '/#' },
-        { id: 3, title: 'LS/LS Press​', path: '/#' },
+        { id: 0, title: 'CC', path: '/#brands' },
+        { id: 1, title: 'ZI-F​', path: '/#brands' },
+        { id: 2, title: 'ZI-CT​', path: '/#brands' },
+        { id: 3, title: 'LS/LS Press​', path: '/#brands' },
       ]
     }
   ]

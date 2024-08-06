@@ -9,8 +9,7 @@ const Footer = () => {
       path: '/company',
       links: [
         { id: 0, title: t('header_3'), path: '/company#history' },
-        { id: 1, title: t('header_4'), path: '/company#team' },
-        { id: 2, title: t('header_5'), path: '/company#contact' }
+        { id: 1, title: t('header_5'), path: '/company#contact' }
       ]
     },
     {
@@ -18,23 +17,23 @@ const Footer = () => {
       title: t('catalogs'),
       path: '/catalog',
       links: [
-        { id: 0, title: 'Creation W.G.', path: '/#' },
-        { id: 1, title: 'Shera', path: '/#' },
-        { id: 2, title: 'Candulor', path: '/#' },
-        { id: 3, title: 'Asiga', path: '/#' },
-        { id: 4, title: 'Hasbio', path: '/#' },
-        { id: 5, title: 'ZirkonZahn', path: '/#' },
+        { id: 0, title: 'Creation W.G.', path: '/catalog?category=22' },
+        { id: 1, title: 'Shera', path: '/catalog?category=39' },
+        { id: 2, title: 'Candulor', path: '/catalog?category=25' },
+        { id: 3, title: 'Asiga', path: '/catalog?category=12' },
+        { id: 4, title: 'Hasbio', path: '/catalog?category=4' },
+        { id: 5, title: 'ZirkonZahn', path: '/catalog?category=2' },
       ]
     },
     {
       id: 2,
       title: t('header_2'),
-      path: '/partners',
+      path: '/#brands',
       links: [
-        { id: 0, title: 'CC', path: '/company#history' },
-        { id: 1, title: 'ZI-F​', path: '/#' },
-        { id: 2, title: 'ZI-CT​', path: '/#' },
-        { id: 3, title: 'LS/LS Press​', path: '/#' },
+        { id: 0, title: 'CC', path: '/#brands' },
+        { id: 1, title: 'ZI-F​', path: '/#brands' },
+        { id: 2, title: 'ZI-CT​', path: '/#brands' },
+        { id: 3, title: 'LS/LS Press​', path: '/#brands' },
       ]
     }
   ]
@@ -98,7 +97,12 @@ const Footer = () => {
             <p>+998 71 111 11 11</p>
             <p>info@derek.uz</p>
           </div>
-          <iframe title="Derek location" src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d11985.553800599746!2d69.22858220344239!3d41.3221657831688!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2s!4v1719667644203!5m2!1sen!2s" width="600" height="450" allowFullScreen="" loading="lazy" referrerPolicy="no-referrer-when-downgrade"></iframe>
+          {/* <iframe title="Derek location" src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d11985.553800599746!2d69.22858220344239!3d41.3221657831688!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2s!4v1719667644203!5m2!1sen!2s" width="600" height="450" allowFullScreen="" loading="lazy" referrerPolicy="no-referrer-when-downgrade"></iframe> */}
+          <div style={{ position: "relative", overflow: "hidden" }}>
+            {/* <a href="https://yandex.uz/maps/10335/tashkent/?utm_medium=mapframe&utm_source=maps" style={{ color: "#eee", fontSize: "12px", position: "absolute", top: "0px" }}>Toshkent</a> */}
+            {/* <a href="https://yandex.uz/maps/10335/tashkent/?ll=69.223951%2C41.297378&mode=whatshere&utm_medium=mapframe&utm_source=maps&whatshere%5Bpoint%5D=69.218867%2C41.296153&whatshere%5Bzoom%5D=14.601157&z=14.84" style={{ color: "#eee", fontSize: "12px", position: "absolute", top: "14px" }}>Yandex Xarita</a> */}
+            <iframe src="https://yandex.uz/map-widget/v1/?ll=69.223951%2C41.297378&mode=whatshere&whatshere%5Bpoint%5D=69.218867%2C41.296153&whatshere%5Bzoom%5D=14.601157&z=14.84" width="600" height="450" allowFullScreen></iframe>
+          </div>
         </div>
       </div>
       <div className="container">

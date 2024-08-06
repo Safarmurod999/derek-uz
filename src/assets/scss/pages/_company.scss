@@ -249,10 +249,14 @@
   }
 
   &__map {
+    div{
+      height: 100%;
+    }
     iframe {
       width: 645px;
       height: 100%;
       border-radius: 10px;
+      border: none;
     }
   }
 

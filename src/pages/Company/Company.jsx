@@ -79,11 +79,16 @@ const Company = () => {
                         <Title>{t('header_5')}</Title>
                         <div className='contact__wrapper'>
                             <div className='contact__map'>
-                                <iframe
+                                {/* <iframe
                                     title="Derek location"
                                     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7464.163500392015!2d69.27595005044465!3d41.311115364712784!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38ae8b2931f41f23%3A0x81095e06b654b845!2sAmir%20Temur%20Square!5e0!3m2!1sen!2sus!4v1719631243614!5m2!1sen!2sus"
                                     width="600" height="450" style={{ border: "0", allowFullScreen: "", loading: "lazy" }}
-                                    referrerPolicy="no-referrer-when-downgrade"></iframe>
+                                    referrerPolicy="no-referrer-when-downgrade"></iframe> */}
+                                <div style={{ position: "relative", overflow: "hidden" }}>
+                                    {/* <a href="https://yandex.uz/maps/10335/tashkent/?utm_medium=mapframe&utm_source=maps" style={{ color: "#eee", fontSize: "12px", position: "absolute", top: "0px" }}>Toshkent</a>
+                                    <a href="https://yandex.uz/maps/10335/tashkent/?ll=69.223951%2C41.297378&mode=whatshere&utm_medium=mapframe&utm_source=maps&whatshere%5Bpoint%5D=69.218867%2C41.296153&whatshere%5Bzoom%5D=14.601157&z=14.84" style={{ color: "#eee", fontSize: "12px", position: "absolute", top: "14px" }}>Yandex Xarita</a> */}
+                                    <iframe title="location of Derek" src="https://yandex.uz/map-widget/v1/?ll=69.223951%2C41.297378&mode=whatshere&whatshere%5Bpoint%5D=69.218867%2C41.296153&whatshere%5Bzoom%5D=14.601157&z=14.84" width="600" height="450" allowFullScreen></iframe>
+                                </div>
                             </div>
 
                             <div className='contact__date'>

@@ -13,7 +13,6 @@ const Layout = () => {
 
     const { data: catalog, loading, error } = useFetch('/catalog-list');
 
-
     const { cartLength } = useSelector((store) => store.cart);
     const [lang, setLang] = useState(JSON.parse(localStorage.getItem('lang')) || 'ru');
 
