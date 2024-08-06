@@ -85,9 +85,7 @@ const Company = () => {
                                     width="600" height="450" style={{ border: "0", allowFullScreen: "", loading: "lazy" }}
                                     referrerPolicy="no-referrer-when-downgrade"></iframe> */}
                                 <div style={{ position: "relative", overflow: "hidden" }}>
-                                    {/* <a href="https://yandex.uz/maps/10335/tashkent/?utm_medium=mapframe&utm_source=maps" style={{ color: "#eee", fontSize: "12px", position: "absolute", top: "0px" }}>Toshkent</a>
-                                    <a href="https://yandex.uz/maps/10335/tashkent/?ll=69.223951%2C41.297378&mode=whatshere&utm_medium=mapframe&utm_source=maps&whatshere%5Bpoint%5D=69.218867%2C41.296153&whatshere%5Bzoom%5D=14.601157&z=14.84" style={{ color: "#eee", fontSize: "12px", position: "absolute", top: "14px" }}>Yandex Xarita</a> */}
-                                    <iframe title="location of Derek" src="https://yandex.uz/map-widget/v1/?ll=69.223951%2C41.297378&mode=whatshere&whatshere%5Bpoint%5D=69.218867%2C41.296153&whatshere%5Bzoom%5D=14.601157&z=14.84" width="600" height="450" allowFullScreen></iframe>
+                                    <iframe title="location of Derek" src="https://yandex.uz/map-widget/v1/?from=mapframe&ll=69.226746%2C41.298023&mode=search&ol=geo&ouri=ymapsbm1%3A%2F%2Fgeo%3Fdata%3DCgoxOTQzMDY2OTAxElRPyrt6YmVraXN0b24sIFRvc2hrZW50LCBDaGlsb256b3IgdHVtYW5pLCAzLUNoYXJ4LUthbW9sb24gbWFoYWxsYSBmdXFhcm9sYXIgeWlnyrtpbmkiCg3zb4pCFc4xJUI%2C&z=15.16" width="600" height="450" allowFullScreen></iframe>
                                 </div>
                             </div>
 

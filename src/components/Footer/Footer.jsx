@@ -98,10 +98,8 @@ const Footer = () => {
             <p>info@derek.uz</p>
           </div>
           {/* <iframe title="Derek location" src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d11985.553800599746!2d69.22858220344239!3d41.3221657831688!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2s!4v1719667644203!5m2!1sen!2s" width="600" height="450" allowFullScreen="" loading="lazy" referrerPolicy="no-referrer-when-downgrade"></iframe> */}
-          <div style={{ position: "relative", overflow: "hidden" }}>
-            {/* <a href="https://yandex.uz/maps/10335/tashkent/?utm_medium=mapframe&utm_source=maps" style={{ color: "#eee", fontSize: "12px", position: "absolute", top: "0px" }}>Toshkent</a> */}
-            {/* <a href="https://yandex.uz/maps/10335/tashkent/?ll=69.223951%2C41.297378&mode=whatshere&utm_medium=mapframe&utm_source=maps&whatshere%5Bpoint%5D=69.218867%2C41.296153&whatshere%5Bzoom%5D=14.601157&z=14.84" style={{ color: "#eee", fontSize: "12px", position: "absolute", top: "14px" }}>Yandex Xarita</a> */}
-            <iframe src="https://yandex.uz/map-widget/v1/?ll=69.223951%2C41.297378&mode=whatshere&whatshere%5Bpoint%5D=69.218867%2C41.296153&whatshere%5Bzoom%5D=14.601157&z=14.84" width="600" height="450" allowFullScreen></iframe>
+          <div style={{ position: "relative", overflow: "hidden", display: "flex", alignItems: "center", justifyContent: "center" }}>
+            <iframe src="https://yandex.uz/map-widget/v1/?from=mapframe&ll=69.226746%2C41.298023&mode=search&ol=geo&ouri=ymapsbm1%3A%2F%2Fgeo%3Fdata%3DCgoxOTQzMDY2OTAxElRPyrt6YmVraXN0b24sIFRvc2hrZW50LCBDaGlsb256b3IgdHVtYW5pLCAzLUNoYXJ4LUthbW9sb24gbWFoYWxsYSBmdXFhcm9sYXIgeWlnyrtpbmkiCg3zb4pCFc4xJUI%2C&z=15.16" width="600" height="450" allowFullScreen></iframe>
           </div>
         </div>
       </div>
