@@ -78,7 +78,7 @@
       }
     }
   }
-  &__categories {
+  &__categories,&__weights {
     height: 165px;
     overflow-y: scroll;
     &::-webkit-scrollbar {

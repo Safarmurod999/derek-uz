@@ -7,8 +7,6 @@ import { useTranslation } from 'react-i18next';
 
 const Aside = ({ toggle, setToggle, weights, categories }) => {
 
-
-
     const lang = i18n.language;
     const { t } = useTranslation();
 
@@ -161,7 +159,7 @@ const Aside = ({ toggle, setToggle, weights, categories }) => {
                 </li>
                 <li className='aside__list--item'>
                     <p>{t('filter_3')}</p>
-                    <ul>
+                    <ul className='aside__weights'>
                         {
                             weights.map((_weight) => (
                                 <li key={_weight.id}>
